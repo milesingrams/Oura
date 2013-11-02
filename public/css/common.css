@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body{
+  height:100%; 
+}
+
+#map-canvas {
+  width: 100%;
+  height: calc(100% - 70px);
+}
+
+#map-canvas img {
+  max-width: none;
+}
+
+.top-bar {
+  width: 100%;
+  height: 70px;
+  background: #333333;
+}
+
+/* shelf CSS */
+
+.shelf {
+  position: absolute;
+  top: 69px;
+  left: -352px;
+  width: 352px;
+  height: calc(100% - 69px);
+  background: #fff;
+  z-index: 1000;
+  transition: left 0.3s ease;
+}
+
+.shelf.open {
+  left: -1px;
+}
+
+.tabs {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+
+.tabs ul {
+  width: 100%;
+  height: 49px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs ul li {
+  position: relative;
+  float: left;
+  height: 100%;
+  width: 28%;
+  margin: 0;
+  padding: 0;
+  background-color: #EDEDED;
+  border-top: 1px solid black;
+  border-bottom: 1px solid #BBB;
+  border-right: 1px solid #BBB;
+}
+
+.tabs ul li a {
+  display: block;
+  width: 100%;
+  height: 49px;
+  padding: 17px 0;
+  font: bold 15px "WhitneyBold","Myriad Pro";
+  color: #666666;
+  text-decoration: none;
+  text-align: center;
+}
+
+.tabs ul li a:hover {
+  color: black;
+}
+
+.tabs ul li.enabled {
+  position: relative;
+  width: 44%;
+  color: black;
+  background-color: #fff;
+  border-bottom: none;
+}
+
+.tabs ul li.enabled a {
+  color: black;
+}
+
+.tab-content {
+  position: absolute;
+  width: 352px;
+  padding: 20px;
+  margin: 0;
+  list-style: none;
+  overflow: auto;
+  top: 49px;
+  left: 0;
+  bottom: 0;
+  border-right: 1px solid #BBB;
+}
+
+.shelfHandle {
+  position: absolute;
+  top: 0px;
+  right: -49px;
+  width: 49px;
+  height: 49px;
+  color: #ccc;
+}
+.shelfHandle:hover {
+}
+
+@media (max-width: 978px) {
+    body {
+      padding:0;
+    }
+}

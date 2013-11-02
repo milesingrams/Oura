@@ -1,0 +1,5 @@
+.DS_Store
+.nodeamonignore
+bower-components/
+node_modules/
+public/lib
