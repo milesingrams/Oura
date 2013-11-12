@@ -6,12 +6,12 @@ html, body{
   height:100%; 
 }
 
-#map-canvas {
+.map-canvas {
   width: 100%;
   height: calc(100% - 70px);
 }
 
-#map-canvas img {
+.map-canvas img {
   max-width: none;
 }
 

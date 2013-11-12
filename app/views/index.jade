@@ -1,6 +1,20 @@
-extends layouts/default
-
-block content
-	section(data-ng-view)
-	script(type="text/javascript").
-		window.user = !{user};
+html(lang='en', xmlns='http://www.w3.org/1999/xhtml', itemscope='itemscope', itemtype='http://schema.org/Product')
+	include ./includes/head
+	body
+		div.main(ng-controller="MainController")
+			div.interface(ng-controller="InterfaceController")
+				div.top-bar
+				div.shelf(ng-class="{open: shelfOpen}")
+					div.shelfHandle(ng-click="shelfOpen=!shelfOpen")
+					div.tabs
+						ul
+							li.enabled
+								a(href="#tweets") Tweets
+							li
+								a(href="#user") User
+							li
+								a(href="#about") About
+					div.tab-content
+						section(ng-view)
+			div.map-canvas(oura-map)
+		include ./includes/foot

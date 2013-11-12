@@ -6,10 +6,8 @@ var mongoose = require('mongoose')
 var tweetSchema = new Schema({
 	_id: {type: Number},
 	text: {type: String},
-	date: {type: Date, expires: 1800},
-	geo: {type: Array},
+	created_at: {type: Date, expires: 1800},
+	geo: {type: [Number], index: '2d'},
 });
-
-tweetSchema.index({  });
  
 mongoose.model('Tweet', tweetSchema);

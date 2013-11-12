@@ -7,7 +7,7 @@ var express = require('express')
   , flash = require('connect-flash')
   , helpers = require('view-helpers')
 
-module.exports = function (app, config, passport) {
+module.exports = function (app, config) {
 
   app.set('showStackError', true)
   // should be placed before express.static
@@ -54,10 +54,6 @@ module.exports = function (app, config, passport) {
 
     // connect flash for flash messages
     app.use(flash())
-
-    // use passport session
-    app.use(passport.initialize())
-    app.use(passport.session())
 
     // routes should be at the last
     app.use(app.router)

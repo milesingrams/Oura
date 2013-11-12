@@ -35,6 +35,7 @@
     , "bower": "latest"
     , "cron": "*"
     , "ntwitter": "*"
+    , "socket.io": "*"
   }
   , "devDependencies": {
         "supertest": "latest"

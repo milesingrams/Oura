@@ -1,6 +1,5 @@
 window.angular.module('ngOura.controllers.interface', [])
-  .controller('InterfaceController', ['$scope', 'Global',
-    function($scope, Global) {
+  .controller('InterfaceController', ['$scope',
+    function($scope) {
     	$scope.shelfOpen = true;
-    	$scope.global = Global;
     }]);
