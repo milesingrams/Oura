@@ -70,7 +70,7 @@ t.stream('statuses/filter', { locations: '-180,-90,180,90' }, function(stream) {
   // We have a connection. Now watch the 'data' event for incomming tweets.
   stream.on('data', function(tweet) {
     // Make sure it was a geotagged tweet
-    if (tweet.geo != null) {
+    if (tweet.coordinates != null) {
       // Make sure it's in english for sentiment analysis
       if (tweet.lang === 'en') {
         sentiment(tweet.text, function(err, result) {
@@ -80,7 +80,7 @@ t.stream('statuses/filter', { locations: '-180,-90,180,90' }, function(stream) {
               _id: tweet.id, 
               text: tweet.text, 
               created_at: new Date(tweet.created_at),
-              geo: tweet.geo.coordinates
+              coordinates: tweet.coordinates.coordinates
             });
             dbTweet.save(function (err){});
           }

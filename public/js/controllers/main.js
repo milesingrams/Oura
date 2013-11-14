@@ -29,7 +29,7 @@ window.angular.module('ngOura.controllers.main', [])
 
 			// add points to array
 			points.forEach(function (point) {
-				var location = new google.maps.LatLng(point.geo[0], point.geo[1]);
+				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
 				var weightedPoint = {location: location, weight: 0.3};
 				$scope.ouraPoints.push(weightedPoint);
 			});
@@ -44,7 +44,7 @@ window.angular.module('ngOura.controllers.main', [])
 
 			// begin timers to add points exactly updateDelay milliseconds after they are created
 			points.forEach(function (point) {
-				var location = new google.maps.LatLng(point.geo[0], point.geo[1]);
+				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
 				var weightedPoint = {location: location, weight: 0.3};
 				var timeDiff = new Date(point.created_at) - sinceDate;
 				var addPointPromise = $timeout(function () {

@@ -20,7 +20,7 @@ module.exports = function (socket) {
 		var bounds = request.bounds; // region to query
 		var untilDate = new Date(request.untilDate);
 		var queryObject = {
-			geo: {$geoWithin: {$box: [[bounds.sw.lat, bounds.sw.lng], [bounds.ne.lat, bounds.ne.lng]]}},
+			coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}},
 			created_at: {$lt: untilDate}
 		};
 
@@ -35,7 +35,7 @@ module.exports = function (socket) {
 					if (i < fullTweetsLimit) {
 						modifiedResults.push(results[i]);
 					} else {
-						modifiedResults.push({geo: results[i].geo});
+						modifiedResults.push({coordinates: results[i].coordinates});
 					}
 				}
 
@@ -49,7 +49,7 @@ module.exports = function (socket) {
 		var sinceDate = new Date(request.sinceDate);
 		var queryDate = new Date().setMilliseconds(0);
 		var queryObject = {
-			geo: {$geoWithin: {$box: [[bounds.sw.lat, bounds.sw.lng], [bounds.ne.lat, bounds.ne.lng]]}},
+			coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}},
 			created_at: {$gte: sinceDate}
 		};
 
