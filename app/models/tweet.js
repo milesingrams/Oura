@@ -7,7 +7,7 @@ var tweetSchema = new Schema({
 	_id: {type: Number},
 	text: {type: String},
 	created_at: {type: Date, expires: 1800},
-	geo: {type: [Number], index: '2d'},
+	geo: {type: [Number], index: '2d'}
 });
  
 mongoose.model('Tweet', tweetSchema);

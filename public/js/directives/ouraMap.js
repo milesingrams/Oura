@@ -1,7 +1,7 @@
 window.angular.module('ngOura.directives.ouraMap', [])
-  .directive('ouraMap', [
-    function() {
-    	return function(scope, element) {
+  .directive('ouraMap', ['$timeout',
+    function($timeout) {
+    	return function (scope, element) {
 
             // properties for customizing map style
             var mapStyle = [
@@ -19,7 +19,7 @@ window.angular.module('ngOura.directives.ouraMap', [])
                     featureType: "landscape",
                     stylers: [
                         { saturation: -100 },
-                        { lightness: 35 }
+                        { lightness: 40 }
                     ]
                 },{
                     featureType: "road",
@@ -31,7 +31,14 @@ window.angular.module('ngOura.directives.ouraMap', [])
                     elementType: "geometry",
                     stylers: [
                         { visibility: "simplified" },
-                        { lightness: 35 }
+                        { lightness: 40 }
+                    ]
+                },{
+                    featureType: "poi",
+                    elementType: "geometry",
+                    stylers: [
+                        { visibility: "simplified" },
+                        { lightness: 40 }
                     ]
                 }
             ];
@@ -49,12 +56,34 @@ window.angular.module('ngOura.directives.ouraMap', [])
             scope.map = new google.maps.Map(element[0], mapOptions);
 
             // called when map finished being dragged or zoomed
-            google.maps.event.addListener(scope.map, 'idle', function() {
+            google.maps.event.addListener(scope.map, 'idle', function () {
                 if (this.getBounds())
-                scope.$apply(function() {
+                scope.$apply(function () {
                     scope.mapIdle();
                 });
             });
+      
+            scope.addPing = function (location) {
+                var icon = {
+                    size: new google.maps.Size( 0, 0 ), // size
+                    anchor: new google.maps.Point( 0, 0 ), // anchor (move to center of marker)
+                };
+
+
+                var ping = new google.maps.Marker({
+                    icon: icon,
+                    clickable: true,
+                    flat: true,
+                    map: scope.map,
+                    optimized: false,
+                    position: location,
+                    title: 'ping'
+                });
+
+                $timeout(function () {
+                    ping.setMap(null);
+                }, 1500);
+            };
 
 
             // HEATMAP CODE -----------------------------------------------------
@@ -84,13 +113,36 @@ window.angular.module('ngOura.directives.ouraMap', [])
                 'rgba(255, 0, 150, 1)'
             ];
 
+            var heatMapGradient2 = [
+                'rgba(0, 150, 255, 0.0)',
+                'rgba(0, 150, 255, 0.0)',
+                'rgba(0, 150, 255, 0.0)',
+                'rgba(0, 150, 255, 0.0)',
+                'rgba(64, 112, 229, 0.4)',
+                'rgba(64, 112, 229, 0.4)',
+                'rgba(64, 112, 229, 0.4)',
+                'rgba(64, 112, 229, 0.4)',
+                'rgba(127, 74, 203, 0.6)',
+                'rgba(127, 74, 203, 0.6)',
+                'rgba(127, 74, 203, 0.6)',
+                'rgba(127, 74, 203, 0.6)',
+                'rgba(191, 38, 177, 0.8)',
+                'rgba(191, 38, 177, 0.8)',
+                'rgba(191, 38, 177, 0.8)',
+                'rgba(191, 38, 177, 0.8)',
+                'rgba(255, 0, 150, 1)',
+                'rgba(255, 0, 150, 1)',
+                'rgba(255, 0, 150, 1)',
+                'rgba(255, 0, 150, 1)'
+            ];
+
             // creates a new heatmap layer with data from the scope
             scope.heatmap = new google.maps.visualization.HeatmapLayer({
                 data: scope.ouraPoints
             });
 
             // applies custom visual characteristics to the heatmap
-            scope.heatmap.setOptions({radius: 35, gradient: heatMapGradient});
+            scope.heatmap.setOptions({radius: 30, gradient: heatMapGradient});
 
             // attaches heatmap to the map
             scope.heatmap.setMap(scope.map);

@@ -79,7 +79,7 @@ t.stream('statuses/filter', { locations: '-180,-90,180,90' }, function(stream) {
             var dbTweet = new Tweet({
               _id: tweet.id, 
               text: tweet.text, 
-              created_at: new Date(tweet.created_at), 
+              created_at: new Date(tweet.created_at),
               geo: tweet.geo.coordinates
             });
             dbTweet.save(function (err){});

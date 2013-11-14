@@ -6,13 +6,36 @@ html, body{
   height:100%; 
 }
 
-.map-canvas {
-  width: 100%;
+#map-canvas {
   height: calc(100% - 70px);
 }
 
-.map-canvas img {
+#map-canvas img {
   max-width: none;
+}
+
+@-webkit-keyframes ping {
+  from {
+    -webkit-transform: scale(0.25);
+    opacity: 1.0;
+  }
+  to {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+/* a semi hack to get the div of the ping markers */
+#map-canvas div.gmnoprint[title="ping"] {
+  -webkit-animation: ping 1.5s ease infinite;
+  border: 6px solid #fff;
+  box-shadow: inset 0 0 5px #FA0096;
+
+  width: 40px !important;
+  height: 40px !important;  
+  margin-left: -20px;
+  margin-top: -20px; 
+  border-radius:20px;
 }
 
 .top-bar {

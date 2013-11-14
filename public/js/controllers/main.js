@@ -48,6 +48,7 @@ window.angular.module('ngOura.controllers.main', [])
 				var weightedPoint = {location: location, weight: 0.3};
 				var timeDiff = new Date(point.created_at) - sinceDate;
 				var addPointPromise = $timeout(function () {
+					$scope.addPing(location);
 					$scope.ouraPoints.push(weightedPoint);
 					if ($scope.ouraPoints.getLength() > fullDataLimit) {
 						$scope.ouraPoints.removeAt(0);
@@ -86,15 +87,15 @@ window.angular.module('ngOura.controllers.main', [])
 		}
 
 		// called when map finishes being dragged or zoomed
-		$scope.mapIdle = function() {
-			var date = new Date(new Date() - updateDelay);
+		$scope.mapIdle = function () {
+			var date = new Date(new Date() - updateDelay).setMilliseconds(0);
 			var bounds = $scope.map.getBounds();
 			getFullData(bounds, date);
 			getNewData(bounds, date);
 		}
 
 		// conversion between google.maps.LatLngBounds and json object
-		var boundsToObject = function(bounds) {
+		var boundsToObject = function (bounds) {
 			var swlat = bounds.getSouthWest().lat();
 			var swlng = bounds.getSouthWest().lng();
 			var nelat = bounds.getNorthEast().lat();
@@ -104,7 +105,7 @@ window.angular.module('ngOura.controllers.main', [])
 		}
 
 		// conversion between json object and google.maps.LatLngBounds
-		var objectToBounds = function(object) {
+		var objectToBounds = function (object) {
 			var sw = new google.maps.LatLng(object.sw.lat, object.sw.lng);
 			var ne = new google.maps.LatLng(object.ne.lat, object.ne.lng);
 

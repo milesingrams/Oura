@@ -7,7 +7,7 @@ module.exports = function (socket) {
 	var fullDataLimit = 150;
 	var newDataLimit = 15;
 	var fullTweetsLimit = 15;
-	var updateDelay = 30000;
+	var updateDelay = 10000;
 
 	socket.emit('config', {
 		fullDataLimit: fullDataLimit,
@@ -18,10 +18,10 @@ module.exports = function (socket) {
 
 	socket.on('getFullData', function (request) {
 		var bounds = request.bounds; // region to query
-		var untilDate = request.untilDate;
+		var untilDate = new Date(request.untilDate);
 		var queryObject = {
 			geo: {$geoWithin: {$box: [[bounds.sw.lat, bounds.sw.lng], [bounds.ne.lat, bounds.ne.lng]]}},
-			created_at: {$lte: untilDate}
+			created_at: {$lt: untilDate}
 		};
 
 		// perform and query and send results to client
@@ -46,10 +46,11 @@ module.exports = function (socket) {
 
 	socket.on('getNewData', function (request) {
 		var bounds = request.bounds; // region to query
-		var sinceDate = request.sinceDate;
+		var sinceDate = new Date(request.sinceDate);
+		var queryDate = new Date().setMilliseconds(0);
 		var queryObject = {
 			geo: {$geoWithin: {$box: [[bounds.sw.lat, bounds.sw.lng], [bounds.ne.lat, bounds.ne.lng]]}},
-			created_at: {$gt: sinceDate}
+			created_at: {$gte: sinceDate}
 		};
 
 		// perform and query and send results to client
@@ -57,7 +58,7 @@ module.exports = function (socket) {
 			.find(queryObject)
 			.limit(newDataLimit)
 			.exec( function(err, results) {
-				var response = {points: results, bounds: bounds, sinceDate: sinceDate, queryDate: new Date()};
+				var response = {points: results, bounds: bounds, sinceDate: sinceDate, queryDate: queryDate};
 				socket.emit('getNewDataResponse', response);
 		});
 	});
