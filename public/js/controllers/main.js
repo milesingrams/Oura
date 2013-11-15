@@ -8,7 +8,8 @@ window.angular.module('ngOura.controllers.main', [])
 		var nextUpdatePromise;
 		var addPointPromiseArray = [];
 		google.maps.visualRefresh = true; // makes google maps look better
-		$scope.ouraPoints = new google.maps.MVCArray(); // array containing datapoints (updates view automatically when adjusted)
+		$scope.mapPoints = new google.maps.MVCArray(); // array containing datapoints (updates view automatically when adjusted)
+		$scope.shelfPoints = [];
 
 
 		// sync configuration with server
@@ -25,13 +26,17 @@ window.angular.module('ngOura.controllers.main', [])
 			var bounds = objectToBounds(response.bounds);
 
 			// clear array
-			$scope.ouraPoints.clear();
+			$scope.mapPoints.clear();
+			$scope.shelfPoints = [];
 
 			// add points to array
 			points.forEach(function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
-				var weightedPoint = {location: location, weight: 0.3};
-				$scope.ouraPoints.push(weightedPoint);
+				var weightedPoint = {location: location, weight: 0.3, point: point};
+				$scope.mapPoints.push(weightedPoint);
+				if (point.text) {
+					$scope.shelfPoints.push(point);
+				}
 			});
 		});
 
@@ -45,13 +50,17 @@ window.angular.module('ngOura.controllers.main', [])
 			// begin timers to add points exactly updateDelay milliseconds after they are created
 			points.forEach(function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
-				var weightedPoint = {location: location, weight: 0.3};
+				var weightedPoint = {location: location, weight: 0.3, point: point};
 				var timeDiff = new Date(point.created_at) - sinceDate;
 				var addPointPromise = $timeout(function () {
 					$scope.addPing(location);
-					$scope.ouraPoints.push(weightedPoint);
-					if ($scope.ouraPoints.getLength() > fullDataLimit) {
-						$scope.ouraPoints.removeAt(0);
+					$scope.mapPoints.insertAt(0, weightedPoint);
+					$scope.shelfPoints.unshift(point);
+					if ($scope.mapPoints.getLength() > fullDataLimit) {
+						$scope.mapPoints.pop();
+					}
+					if ($scope.shelfPoints.length > fullTweetsLimit) {
+						$scope.shelfPoints.pop();
 					}
 				}, timeDiff);
 				addPointPromiseArray.push(addPointPromise);

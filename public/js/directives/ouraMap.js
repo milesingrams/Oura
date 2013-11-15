@@ -138,7 +138,7 @@ window.angular.module('ngOura.directives.ouraMap', [])
 
             // creates a new heatmap layer with data from the scope
             scope.heatmap = new google.maps.visualization.HeatmapLayer({
-                data: scope.ouraPoints
+                data: scope.mapPoints
             });
 
             // applies custom visual characteristics to the heatmap

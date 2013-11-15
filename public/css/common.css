@@ -6,8 +6,9 @@ html, body{
   height:100%; 
 }
 
+/* MAP STYILING */
 #map-canvas {
-  height: calc(100% - 70px);
+  height: calc(100% - 62px);
 }
 
 #map-canvas img {
@@ -27,7 +28,7 @@ html, body{
 
 /* a semi hack to get the div of the ping markers */
 #map-canvas div.gmnoprint[title="ping"] {
-  -webkit-animation: ping 1.5s ease infinite;
+  -webkit-animation: ping 1.5s ease;
   border: 6px solid #fff;
   box-shadow: inset 0 0 5px #FA0096;
 
@@ -38,21 +39,30 @@ html, body{
   border-radius:20px;
 }
 
+/* TOP BAR STYLING */
 .top-bar {
   width: 100%;
-  height: 70px;
+  height: 62px;
   background: #333333;
 }
 
-/* shelf CSS */
+#logo {
+  background: url('/img/oura-logo.png') no-repeat;
+  display: inline-block;
+  float: left;
+  height: 62px;
+  width: 130px;
+}
 
+/* SHELF STYLING */
 .shelf {
   position: absolute;
-  top: 69px;
-  left: -352px;
-  width: 352px;
-  height: calc(100% - 69px);
-  background: #fff;
+  top: 62px;
+  left: -380px;
+  width: 380px;
+  height: calc(100% - 62px);
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
   z-index: 1000;
   transition: left 0.3s ease;
 }
@@ -61,71 +71,34 @@ html, body{
   left: -1px;
 }
 
-.tabs {
-  display: inline-block;
-  vertical-align: top;
-  width: 100%;
-}
-
-.tabs ul {
-  width: 100%;
-  height: 49px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tabs ul li {
-  position: relative;
-  float: left;
-  height: 100%;
-  width: 28%;
-  margin: 0;
-  padding: 0;
-  background-color: #EDEDED;
-  border-top: 1px solid black;
-  border-bottom: 1px solid #BBB;
-  border-right: 1px solid #BBB;
-}
-
-.tabs ul li a {
-  display: block;
-  width: 100%;
-  height: 49px;
-  padding: 17px 0;
-  font: bold 15px "WhitneyBold","Myriad Pro";
-  color: #666666;
-  text-decoration: none;
-  text-align: center;
-}
-
-.tabs ul li a:hover {
-  color: black;
-}
-
-.tabs ul li.enabled {
-  position: relative;
-  width: 44%;
-  color: black;
-  background-color: #fff;
-  border-bottom: none;
-}
-
-.tabs ul li.enabled a {
-  color: black;
-}
-
-.tab-content {
+.content {
   position: absolute;
-  width: 352px;
-  padding: 20px;
-  margin: 0;
-  list-style: none;
-  overflow: auto;
-  top: 49px;
+  width: 380px;
+  padding: 0 10px;
+  top: 10px;
   left: 0;
   bottom: 0;
-  border-right: 1px solid #BBB;
+  overflow: hidden;
+}
+
+@-webkit-keyframes fadein {
+    from {
+      opacity: 0; 
+    }
+    to {
+      opacity: 1; 
+    }
+}
+
+.tweet {
+  -webkit-animation: fadein 1s ease;
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 10px;
+  position: relative;
+  width: 360px;
+  box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
 }
 
 .shelfHandle {
