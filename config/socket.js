@@ -21,7 +21,7 @@ module.exports = function (socket) {
 		var untilDate = new Date(request.untilDate);
 		var queryObject = {
 			coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}},
-			created_at: {$lt: untilDate}
+			saved_at: {$lt: untilDate}
 		};
 
 		// perform and query and send results to client
@@ -50,7 +50,7 @@ module.exports = function (socket) {
 		var queryDate = new Date().setMilliseconds(0);
 		var queryObject = {
 			coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}},
-			created_at: {$gte: sinceDate}
+			saved_at: {$gte: sinceDate}
 		};
 
 		// perform and query and send results to client

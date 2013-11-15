@@ -3,4 +3,4 @@ window.app = angular.module('ngOuraApp', ['ngCookies', 'ngResource', 'ui.bootstr
 // bundling dependencies
 window.angular.module('ngOura.controllers', ['ngOura.controllers.main', 'ngOura.controllers.interface']);
 window.angular.module('ngOura.services', ['ngOura.services.socket']);
-window.angular.module('ngOura.directives', ['ngOura.directives.ouraMap']);
+window.angular.module('ngOura.directives', ['ngOura.directives.ouraMap', 'ngOura.directives.tweet']);

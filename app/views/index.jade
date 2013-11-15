@@ -5,9 +5,9 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', itemscope='itemscope', ite
 			div.interface(ng-controller="InterfaceController")
 				div.top-bar
 					a(href="/" id="logo")
-				div.shelf(ng-class="{open: shelfOpen}")
-					div.shelfHandle(ng-click="shelfOpen=!shelfOpen")
+				div.shelf(ng-class="{closed: shelfClosed}")
+					div.shelfHandle(ng-click="shelfClosed=!shelfClosed")
 					div.content
-						div.tweet(ng-repeat="point in shelfPoints | limitTo:15") {{point.text}}
+						tweet.tweet(ng-repeat="tweet in shelfPoints" tweet="tweet")
 			div(oura-map id="map-canvas")
 		include ./includes/foot

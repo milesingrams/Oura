@@ -78,9 +78,15 @@ t.stream('statuses/filter', { locations: '-180,-90,180,90' }, function(stream) {
           if (result > 1) {
             var dbTweet = new Tweet({
               _id: tweet.id, 
-              text: tweet.text, 
-              created_at: new Date(tweet.created_at),
-              coordinates: tweet.coordinates.coordinates
+              text: tweet.text,
+              user: {
+                _id: tweet.user.id,
+                name: tweet.user.name,
+                screen_name: tweet.user.screen_name,
+                profile_image_url: tweet.user.profile_image_url
+              },
+              coordinates: tweet.coordinates.coordinates,
+              saved_at: new Date()
             });
             dbTweet.save(function (err){});
           }
