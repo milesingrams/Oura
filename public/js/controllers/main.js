@@ -29,7 +29,6 @@ window.angular.module('ngOura.controllers.main', [])
 			// clear array
 			$scope.mapPoints.clear();
 			$scope.shelfPoints = fullTweets;
-			console.log(points.length);
 
 			// add points to array
 			points.forEach(function (point) {
@@ -50,7 +49,7 @@ window.angular.module('ngOura.controllers.main', [])
 			points.forEach(function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
 				var weightedPoint = {location: location, weight: 0.3, point: point};
-				var timeDiff = new Date(point.created_at) - sinceDate;
+				var timeDiff = new Date(point.saved_at) - sinceDate;
 				var addPointPromise = $timeout(function () {
 					$scope.addPing(location);
 					$scope.mapPoints.insertAt(0, weightedPoint);

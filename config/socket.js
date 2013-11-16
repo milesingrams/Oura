@@ -27,7 +27,7 @@ module.exports = function (socket) {
 		// perform and query and send results to client
 		Tweet
 			.find(queryObject)
-			.sort({'saved_at': -1})
+			.sort({'$natural': -1})
 			.limit(fullDataLimit)
 			.exec( function(err, results) {
 				var fullTweets = [];
