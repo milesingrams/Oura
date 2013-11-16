@@ -30,16 +30,17 @@ module.exports = function (socket) {
 			.sort({'created_at': -1})
 			.limit(fullDataLimit)
 			.exec( function(err, results) {
-				var modifiedResults = [];
+				var fullTweets = [];
+				var pointsArray = [];
 				for (var i=0; i<results.length; i++) {
 					if (i < fullTweetsLimit) {
-						modifiedResults.push(results[i]);
+						fullTweets.push(results[i]);
 					} else {
-						modifiedResults.push({coordinates: results[i].coordinates});
+						pointsArray.push({coordinates: results[i].coordinates});
 					}
 				}
 
-				var response = {points: modifiedResults, bounds: bounds};
+				var response = {pointsArray: pointsArray, fullTweets: fullTweets, bounds: bounds};
 				socket.emit('getFullDataResponse', response);
 		});
 	});
@@ -58,7 +59,7 @@ module.exports = function (socket) {
 			.find(queryObject)
 			.limit(newDataLimit)
 			.exec( function(err, results) {
-				var response = {points: results, bounds: bounds, sinceDate: sinceDate, queryDate: queryDate};
+				var response = {fullTweets: results, bounds: bounds, sinceDate: sinceDate, queryDate: queryDate};
 				socket.emit('getNewDataResponse', response);
 		});
 	});

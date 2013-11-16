@@ -22,27 +22,26 @@ window.angular.module('ngOura.controllers.main', [])
 
 		// when a full data update arrives
 		socket.on('getFullDataResponse', function (response) {
-			var points = response.points;
+			var points = response.pointsArray;
+			var fullTweets = response.fullTweets;
 			var bounds = objectToBounds(response.bounds);
 
 			// clear array
 			$scope.mapPoints.clear();
-			$scope.shelfPoints = [];
+			console.log(fullTweets);
+			$scope.shelfPoints = fullTweets;
 
 			// add points to array
 			points.forEach(function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
 				var weightedPoint = {location: location, weight: 0.3, point: point};
 				$scope.mapPoints.push(weightedPoint);
-				if (point.text) {
-					$scope.shelfPoints.push(point);
-				}
 			});
 		});
 
 		// when new data arrives
 		socket.on('getNewDataResponse', function (response) {
-			var points = response.points;
+			var points = response.fullTweets;
 			var bounds = objectToBounds(response.bounds);
 			var sinceDate = new Date(response.sinceDate);
 			var lastUpdateDate = new Date(response.queryDate);
@@ -55,6 +54,8 @@ window.angular.module('ngOura.controllers.main', [])
 				var addPointPromise = $timeout(function () {
 					$scope.addPing(location);
 					$scope.mapPoints.insertAt(0, weightedPoint);
+					if (point.text) {
+					}
 					$scope.shelfPoints.unshift(point);
 					if ($scope.mapPoints.getLength() > fullDataLimit) {
 						$scope.mapPoints.pop();
