@@ -7,7 +7,7 @@ window.angular.module('ngOura.directives.tweet', [])
     			tweet: '=tweet'
     		},
     		templateUrl: '/templates/tweet.html',
-            link: function (scope, element) {
+            link: function (scope) {
                 scope.oura = Math.floor(1 + Math.random() * 15);
             }
     	}

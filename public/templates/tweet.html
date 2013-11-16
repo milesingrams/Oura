@@ -1,6 +1,6 @@
 <div class="content">
 	<div class="tweet-header">
-		<a class="profile-group" href="/">
+		<a class="profile-group" href="http://twitter.com/{{tweet.user.screen_name}}">
 			<img class="profile-img" src="{{tweet.user.profile_image_url}}" style="box-shadow: 0 0 {{oura}}px rgba(255, 0, 150, 0.8)"></img>
 			<strong class="name"> {{tweet.user.name}} </strong>
 			<span class="screen-name">
@@ -8,5 +8,5 @@
 			</span>
 		</a>
 	</div>
-	<p class="tweet-text"> {{tweet.text}} </p>
+	<p class="tweet-text" ng-bind-html="tweet.text | parseUrl"> </p>
 </div>
