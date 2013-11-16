@@ -27,7 +27,7 @@ module.exports = function (socket) {
 		// perform and query and send results to client
 		Tweet
 			.find(queryObject)
-			.sort({'created_at': -1})
+			.sort({'saved_at': -1})
 			.limit(fullDataLimit)
 			.exec( function(err, results) {
 				var fullTweets = [];
@@ -35,9 +35,8 @@ module.exports = function (socket) {
 				for (var i=0; i<results.length; i++) {
 					if (i < fullTweetsLimit) {
 						fullTweets.push(results[i]);
-					} else {
-						pointsArray.push({coordinates: results[i].coordinates});
 					}
+					pointsArray.push({coordinates: results[i].coordinates});
 				}
 
 				var response = {pointsArray: pointsArray, fullTweets: fullTweets, bounds: bounds};

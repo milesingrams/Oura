@@ -28,8 +28,8 @@ window.angular.module('ngOura.controllers.main', [])
 
 			// clear array
 			$scope.mapPoints.clear();
-			console.log(fullTweets);
 			$scope.shelfPoints = fullTweets;
+			console.log(points.length);
 
 			// add points to array
 			points.forEach(function (point) {
