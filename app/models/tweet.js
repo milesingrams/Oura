@@ -6,6 +6,7 @@ var mongoose = require('mongoose')
 var tweetSchema = new Schema({
 	_id: {type: Number},
 	text: {type: String},
+	entities: {type: Object},
 	user: {
 		_id: {type: Number},
 		name: {type: String},

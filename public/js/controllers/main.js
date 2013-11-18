@@ -3,7 +3,9 @@ window.angular.module('ngOura.controllers.main', [])
 	function($scope, $timeout, socket) {
 
 		// instantiate main variables
-		var fullDataLimit, newDataLimit, fullTweetsLimit, updateDelay;
+		var fullDataLimit = 150;
+		var updateDelay = 10000;
+		$scope.fullTweetLimit = 40;
 
 		var nextUpdatePromise;
 		var addPointPromiseArray = [];
@@ -11,17 +13,9 @@ window.angular.module('ngOura.controllers.main', [])
 		$scope.mapPoints = new google.maps.MVCArray(); // array containing datapoints (updates view automatically when adjusted)
 		$scope.shelfPoints = [];
 
-
-		// sync configuration with server
-		socket.on('config', function (config) {
-			fullDataLimit = config.fullDataLimit;
-			newDataLimit = config.newDataLimit;
-			fullTweetsLimit = config.fullTweetsLimit;
-			updateDelay = config.updateDelay;
-		});
-
 		// when a full data update arrives
 		socket.on('getFullDataResponse', function (response) {
+			console.log(JSON.stringify(response).length);
 			var points = response.pointsArray;
 			var fullTweets = response.fullTweets;
 			var bounds = objectToBounds(response.bounds);
@@ -31,7 +25,7 @@ window.angular.module('ngOura.controllers.main', [])
 			$scope.shelfPoints = fullTweets;
 
 			// add points to array
-			points.forEach(function (point) {
+			angular.forEach(points, function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
 				var weightedPoint = {location: location, weight: 0.3, point: point};
 				$scope.mapPoints.push(weightedPoint);
@@ -46,7 +40,7 @@ window.angular.module('ngOura.controllers.main', [])
 			var lastUpdateDate = new Date(response.queryDate);
 
 			// begin timers to add points exactly updateDelay milliseconds after they are created
-			points.forEach(function (point) {
+			angular.forEach(points, function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
 				var weightedPoint = {location: location, weight: 0.3, point: point};
 				var timeDiff = new Date(point.saved_at) - sinceDate;
@@ -59,7 +53,7 @@ window.angular.module('ngOura.controllers.main', [])
 					if ($scope.mapPoints.getLength() > fullDataLimit) {
 						$scope.mapPoints.pop();
 					}
-					if ($scope.shelfPoints.length > fullTweetsLimit) {
+					if ($scope.shelfPoints.length > $scope.fullTweetLimit) {
 						$scope.shelfPoints.pop();
 					}
 				}, timeDiff);
@@ -76,7 +70,7 @@ window.angular.module('ngOura.controllers.main', [])
 		var getFullData = function (bounds, untilDate) {
 			// cancel current update timers
 			$timeout.cancel(nextUpdatePromise);
-			addPointPromiseArray.forEach(function (addPointPromise) {
+			angular.forEach(addPointPromiseArray, function (addPointPromise) {
 				$timeout.cancel(addPointPromise);
 			});
 

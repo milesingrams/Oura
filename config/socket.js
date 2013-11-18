@@ -6,15 +6,7 @@ module.exports = function (socket) {
 
 	var fullDataLimit = 150;
 	var newDataLimit = 15;
-	var fullTweetsLimit = 15;
-	var updateDelay = 10000;
-
-	socket.emit('config', {
-		fullDataLimit: fullDataLimit,
-		newDataLimit: newDataLimit,
-		fullTweetsLimit: fullTweetsLimit,
-		updateDelay: updateDelay
-	});
+	var fullTweetsPerUpdate = 10;
 
 	socket.on('getFullData', function (request) {
 		var bounds = request.bounds; // region to query
@@ -33,7 +25,7 @@ module.exports = function (socket) {
 				var fullTweets = [];
 				var pointsArray = [];
 				for (var i=0; i<results.length; i++) {
-					if (i < fullTweetsLimit) {
+					if (i < fullTweetsPerUpdate) {
 						fullTweets.push(results[i]);
 					}
 					pointsArray.push({coordinates: results[i].coordinates});
