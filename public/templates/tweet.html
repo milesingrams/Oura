@@ -8,5 +8,5 @@
 			</span>
 		</a>
 	</div>
-	<p class="tweet-text" ng-bind-html="htmlText"></p>
+	<p class="tweet-text" ng-bind-html="tweet.text | parseUrl | parseUsername | parseHashtag"></p>
 </div>

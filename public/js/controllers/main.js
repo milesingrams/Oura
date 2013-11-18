@@ -15,7 +15,6 @@ window.angular.module('ngOura.controllers.main', [])
 
 		// when a full data update arrives
 		socket.on('getFullDataResponse', function (response) {
-			console.log(JSON.stringify(response).length);
 			var points = response.pointsArray;
 			var fullTweets = response.fullTweets;
 			var bounds = objectToBounds(response.bounds);

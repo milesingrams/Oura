@@ -79,7 +79,6 @@ t.stream('statuses/filter', { locations: '-180,-90,180,90' }, function(stream) {
             var dbTweet = new Tweet({
               _id: tweet.id, 
               text: tweet.text,
-              entities: tweet.entities,
               user: {
                 _id: tweet.user.id,
                 name: tweet.user.name,
