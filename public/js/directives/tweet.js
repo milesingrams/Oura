@@ -4,7 +4,8 @@ window.angular.module('ngOura.directives.tweet', [])
     	return {
     		restrict: 'E',
     		scope: {
-    			tweet: '=tweet'
+    			tweet: '=tweet',
+                map: '=map'
     		},
     		templateUrl: '/templates/tweet.html',
             link: function (scope, element) {
@@ -14,6 +15,14 @@ window.angular.module('ngOura.directives.tweet', [])
                     boxShadows.push("0 0 0 " + i*3 + "px rgba(255, 0, 150, 0.15)");
                 }
                 scope.ouraStyle = {'box-shadow': boxShadows.join(", ")};
+
+                scope.addToMap = function () {
+                    scope.tweet.location = new google.maps.LatLng(scope.tweet.coordinates[1], scope.tweet.coordinates[0]);
+                    scope.mapOverlay = new TweetOverlay(scope.tweet.location, scope.map, scope.tweet);
+                }
+                scope.removeFromMap = function () {
+                    scope.mapOverlay.setMap(null);
+                }
             }   
     	}
     }]);

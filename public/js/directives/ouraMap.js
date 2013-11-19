@@ -65,7 +65,6 @@ window.angular.module('ngOura.directives.ouraMap', [])
       
             scope.addPing = function (location) {
 
-
                 var ping = new PingOverlay(location, scope.map);
 
                 $timeout(function () {
@@ -75,7 +74,6 @@ window.angular.module('ngOura.directives.ouraMap', [])
 
 
             // HEATMAP CODE -----------------------------------------------------
-
 
             // defines a custom heatmap gradient
             var heatMapGradient = [

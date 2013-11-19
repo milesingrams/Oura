@@ -8,6 +8,6 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', itemscope='itemscope', ite
 				div.shelf(ng-class="{closed: shelfClosed}")
 					div.shelfHandle(ng-click="shelfClosed=!shelfClosed")
 					div.content
-						tweet.tweet(ng-repeat="tweet in shelfPoints | limitTo: fullTweetLimit" tweet="tweet")
+						tweet.tweet(ng-repeat="tweet in shelfPoints | limitTo: fullTweetLimit" tweet="tweet" map="map")
 			div(oura-map id="map-canvas")
 		include ./includes/foot

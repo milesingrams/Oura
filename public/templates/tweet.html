@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" ng-mouseenter="addToMap()" ng-mouseleave="removeFromMap()">
 	<div class="tweet-header">
 		<a class="profile-group" target="_blank" ng-href="http://twitter.com/{{tweet.user.screen_name}}">
 			<img class="profile-img" ng-src="{{tweet.user.profile_image_url}}" ng-style="ouraStyle"></img>

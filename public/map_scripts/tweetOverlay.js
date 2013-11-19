@@ -1,17 +1,19 @@
-PingOverlay.prototype = new google.maps.OverlayView();
+TweetOverlay.prototype = new google.maps.OverlayView();
 
-function PingOverlay(location, map) {
+function TweetOverlay(location, map, tweet) {
   // Initialize all properties.
   this.location_ = location;
   this.map_ = map;
   this.div_ = null;
+  this.tweet = tweet;
   this.setMap(map);
 }
 
-PingOverlay.prototype.onAdd = function() {
+TweetOverlay.prototype.onAdd = function() {
 
-  var div = document.createElement('div');
-  div.className = 'ping';
+  var div = document.createElement('img');
+  div.className = 'map-tweet';
+  div.setAttribute('src', this.tweet.user.profile_image_url);
   div.style.position = 'absolute';
   this.div_ = div;
 
@@ -20,7 +22,7 @@ PingOverlay.prototype.onAdd = function() {
   panes.overlayImage.appendChild(div);
 };
 
-PingOverlay.prototype.draw = function() {
+TweetOverlay.prototype.draw = function() {
 
   var overlayProjection = this.getProjection();
   var pos = overlayProjection.fromLatLngToDivPixel(this.location_);
@@ -32,7 +34,7 @@ PingOverlay.prototype.draw = function() {
 
 // The onRemove() method will be called automatically from the API if
 // we ever set the overlay's map property to 'null'.
-PingOverlay.prototype.onRemove = function() {
+TweetOverlay.prototype.onRemove = function() {
   
   this.div_.parentNode.removeChild(this.div_);
   this.div_ = null;
