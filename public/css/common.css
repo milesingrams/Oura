@@ -40,7 +40,7 @@ html, body{
 
 @-webkit-keyframes pop-in {
   from {
-    -webkit-transform: scale(0.5);
+    -webkit-transform: scale(0.7);
   }
   to {
     -webkit-transform: scale(1.0);

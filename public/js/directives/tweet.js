@@ -23,6 +23,11 @@ window.angular.module('ngOura.directives.tweet', [])
                 scope.removeFromMap = function () {
                     scope.mapOverlay.setMap(null);
                 }
+                scope.$on('$destroy', function() {
+                    if(scope.mapOverlay) {
+                        scope.removeFromMap();
+                    }
+                });
             }   
     	}
     }]);
