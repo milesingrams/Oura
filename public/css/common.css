@@ -26,8 +26,7 @@ html, body{
   }
 }
 
-/* a semi hack to get the div of the ping markers */
-#map-canvas div.gmnoprint[title="ping"] {
+#map-canvas .ping {
   -webkit-animation: ping 1.5s ease;
   border: 6px solid #fff;
   box-shadow: inset 0 0 5px #FA0096;
@@ -81,6 +80,17 @@ html, body{
   overflow: scroll;
 }
 
+.shelfHandle {
+  position: absolute;
+  top: 0px;
+  right: -49px;
+  width: 49px;
+  height: 49px;
+  color: #ccc;
+}
+.shelfHandle:hover {
+}
+
 @-webkit-keyframes fadein {
     from {
       opacity: 0;
@@ -89,6 +99,8 @@ html, body{
       opacity: 1; 
     }
 }
+
+/* TWEET STYLING */
 
 .tweet {
   display: block;
@@ -114,7 +126,7 @@ html, body{
   color: #333;
 }
 
-.profile-group:hover .name {  
+.profile-group:hover .name {
   text-decoration: underline;
 }
 
@@ -136,15 +148,8 @@ html, body{
   white-space: pre-wrap;
 }
 
-.shelfHandle {
-  position: absolute;
-  top: 0px;
-  right: -49px;
-  width: 49px;
-  height: 49px;
-  color: #ccc;
-}
-.shelfHandle:hover {
+.tweet .tweet-text a {
+  color: #0084B4;
 }
 
 @media (max-width: 978px) {

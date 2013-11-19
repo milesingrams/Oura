@@ -64,21 +64,9 @@ window.angular.module('ngOura.directives.ouraMap', [])
             });
       
             scope.addPing = function (location) {
-                var icon = {
-                    size: new google.maps.Size( 0, 0 ), // size
-                    anchor: new google.maps.Point( 0, 0 ), // anchor (move to center of marker)
-                };
 
 
-                var ping = new google.maps.Marker({
-                    icon: icon,
-                    clickable: true,
-                    flat: true,
-                    map: scope.map,
-                    optimized: false,
-                    position: location,
-                    title: 'ping'
-                });
+                var ping = new PingOverlay(location, scope.map);
 
                 $timeout(function () {
                     ping.setMap(null);
@@ -107,29 +95,6 @@ window.angular.module('ngOura.directives.ouraMap', [])
                 'rgba(255, 0, 150, 0.75)',
                 'rgba(255, 0, 150, 0.75)',
                 'rgba(255, 0, 150, 0.75)',
-                'rgba(255, 0, 150, 1)',
-                'rgba(255, 0, 150, 1)',
-                'rgba(255, 0, 150, 1)',
-                'rgba(255, 0, 150, 1)'
-            ];
-
-            var heatMapGradient2 = [
-                'rgba(0, 150, 255, 0.0)',
-                'rgba(0, 150, 255, 0.0)',
-                'rgba(0, 150, 255, 0.0)',
-                'rgba(0, 150, 255, 0.0)',
-                'rgba(64, 112, 229, 0.4)',
-                'rgba(64, 112, 229, 0.4)',
-                'rgba(64, 112, 229, 0.4)',
-                'rgba(64, 112, 229, 0.4)',
-                'rgba(127, 74, 203, 0.6)',
-                'rgba(127, 74, 203, 0.6)',
-                'rgba(127, 74, 203, 0.6)',
-                'rgba(127, 74, 203, 0.6)',
-                'rgba(191, 38, 177, 0.8)',
-                'rgba(191, 38, 177, 0.8)',
-                'rgba(191, 38, 177, 0.8)',
-                'rgba(191, 38, 177, 0.8)',
                 'rgba(255, 0, 150, 1)',
                 'rgba(255, 0, 150, 1)',
                 'rgba(255, 0, 150, 1)',
