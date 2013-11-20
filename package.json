@@ -1,9 +1,9 @@
 {
-    "name": "mean"
-  , "description": "Mongo"
+    "name": "oura"
+  , "description": "See positivity. Show positivity."
   , "version": "1.0.0"
   , "private": false
-  , "author": "MEAN - A Modern Stack: MongoDB, ExpressJS, AngularJS, NodeJS. (BONUS: Passport User Support)."
+  , "author": "Miles Ingram"
   , "engines": {
         "node": "0.10.x"
       , "npm":  "1.2.x"

@@ -1,4 +1,4 @@
-window.angular.module('ngOura.directives.tweet', [])
+window.angular.module('oura.directives.tweet', [])
   .directive('tweet', [
     function() {
     	return {

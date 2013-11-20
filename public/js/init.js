@@ -1,5 +1,5 @@
 window.bootstrap = function () {
-    angular.bootstrap(document, ['ngOuraApp']);
+    angular.bootstrap(document, ['ouraApp']);
 }
 
 window.init = function () {

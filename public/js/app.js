@@ -1,7 +1,7 @@
-window.app = angular.module('ngOuraApp', ['ngCookies', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ngRoute', 'ngOura.controllers', 'ngOura.directives', 'ngOura.services', 'ngOura.filters']);
+window.app = angular.module('ouraApp', ['ngCookies', 'ngSanitize', 'ngResource', 'ui.bootstrap', 'ngRoute', 'oura.controllers', 'oura.directives', 'oura.services', 'oura.filters']);
 
 // bundling dependencies
-window.angular.module('ngOura.controllers', ['ngOura.controllers.main', 'ngOura.controllers.interface']);
-window.angular.module('ngOura.services', ['ngOura.services.socket']);
-window.angular.module('ngOura.filters', ['ngOura.filters.parseUrl', 'ngOura.filters.parseUsername', 'ngOura.filters.parseHashtag']);
-window.angular.module('ngOura.directives', ['ngOura.directives.ouraMap', 'ngOura.directives.tweet']);
+window.angular.module('oura.controllers', ['oura.controllers.main', 'oura.controllers.interface']);
+window.angular.module('oura.services', ['oura.services.socket']);
+window.angular.module('oura.filters', ['oura.filters.parseUrl', 'oura.filters.parseUsername', 'oura.filters.parseHashtag']);
+window.angular.module('oura.directives', ['oura.directives.ouraMap', 'oura.directives.tweet']);

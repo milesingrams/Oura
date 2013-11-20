@@ -1,4 +1,4 @@
-window.angular.module('ngOura.filters.parseHashtag', [])
+window.angular.module('oura.filters.parseHashtag', [])
   .filter('parseHashtag', [
     function() {
 	    var hashtagPattern = /[#]+[A-Za-z0-9-_]+/g;

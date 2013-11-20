@@ -135,6 +135,10 @@ html, body{
   border-radius: 5px;
 }
 
+.tweet:hover {
+  background: #F5F5F5;
+}
+
 .tweet > .content {
   margin-left: 50px;
 }

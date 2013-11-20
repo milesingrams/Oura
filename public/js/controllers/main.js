@@ -1,4 +1,4 @@
-window.angular.module('ngOura.controllers.main', [])
+window.angular.module('oura.controllers.main', [])
   .controller('MainController', ['$scope', '$timeout', 'socket',
 	function($scope, $timeout, socket) {
 
@@ -26,7 +26,7 @@ window.angular.module('ngOura.controllers.main', [])
 			// add points to array
 			angular.forEach(points, function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
-				var weightedPoint = {location: location, weight: 0.3, point: point};
+				var weightedPoint = {location: location, weight: 0.3};
 				$scope.mapPoints.push(weightedPoint);
 			});
 		});
@@ -41,13 +41,12 @@ window.angular.module('ngOura.controllers.main', [])
 			// begin timers to add points exactly updateDelay milliseconds after they are created
 			angular.forEach(points, function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
-				var weightedPoint = {location: location, weight: 0.3, point: point};
+				var weightedPoint = {location: location, weight: 0.3};
 				var timeDiff = new Date(point.saved_at) - sinceDate;
 				var addPointPromise = $timeout(function () {
 					$scope.addPing(location);
 					$scope.mapPoints.insertAt(0, weightedPoint);
-					if (point.text) {
-					}
+
 					$scope.shelfPoints.unshift(point);
 					if ($scope.mapPoints.getLength() > fullDataLimit) {
 						$scope.mapPoints.pop();

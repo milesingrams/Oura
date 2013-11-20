@@ -14,7 +14,7 @@ var path = require('path')
 
 module.exports = {
   development: {
-    db: 'mongodb://localhost/ngOura-dev',
+    db: 'mongodb://localhost/oura-dev',
     root: rootPath,
     notifier: notifier,
     app: {
@@ -22,7 +22,7 @@ module.exports = {
     }
   },
   test: {
-    db: 'mongodb://localhost/ngOura-test',
+    db: 'mongodb://localhost/oura-test',
     root: rootPath,
     notifier: notifier,
     app: {
@@ -30,7 +30,7 @@ module.exports = {
     }
   },
   production: {
-    db: 'mongodb://localhost/ngOura',
+    db: 'mongodb://localhost/oura',
     root: rootPath,
     notifier: notifier,
     app: {

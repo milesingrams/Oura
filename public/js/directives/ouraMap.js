@@ -1,4 +1,4 @@
-window.angular.module('ngOura.directives.ouraMap', [])
+window.angular.module('oura.directives.ouraMap', [])
   .directive('ouraMap', ['$timeout',
     function($timeout) {
     	return function (scope, element) {

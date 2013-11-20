@@ -45,7 +45,7 @@ module.exports = function (app, config) {
 
     // express/mongo session storage
     app.use(express.session({
-      secret: 'ngOura',
+      secret: 'oura',
       store: new mongoStore({
         url: config.db,
         collection : 'sessions'

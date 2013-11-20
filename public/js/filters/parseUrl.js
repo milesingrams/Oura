@@ -1,4 +1,4 @@
-window.angular.module('ngOura.filters.parseUrl', [])
+window.angular.module('oura.filters.parseUrl', [])
   .filter('parseUrl', [
     function() {
 	    var urlPattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/gi;

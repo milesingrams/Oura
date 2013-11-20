@@ -1,4 +1,4 @@
-window.angular.module('ngOura.services.socket', [])
+window.angular.module('oura.services.socket', [])
   .factory('socket', function ($rootScope) {
     var socket = io.connect();
     return {

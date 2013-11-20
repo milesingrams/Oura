@@ -1,4 +1,4 @@
-window.angular.module('ngOura.filters.parseUsername', [])
+window.angular.module('oura.filters.parseUsername', [])
   .filter('parseUsername', [
     function() {
 	    var usernamePattern = /[@]+[A-Za-z0-9-_]+/g;
