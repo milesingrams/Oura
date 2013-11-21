@@ -1,12 +1,15 @@
 // export function for listening to the socket
 var mongoose = require('mongoose'),
 Tweet = mongoose.model('Tweet')
+Venue = mongoose.model('Venue')
 
 module.exports = function (socket) {
 
 	var fullDataLimit = 150;
 	var newDataLimit = 15;
 	var fullTweetsPerUpdate = 10;
+
+	var venueLimit = 20;
 
 	socket.on('getFullData', function (request) {
 		var bounds = request.bounds; // region to query
@@ -52,6 +55,23 @@ module.exports = function (socket) {
 			.exec( function(err, results) {
 				var response = {fullTweets: results, bounds: bounds, sinceDate: sinceDate, queryDate: queryDate};
 				socket.emit('getNewDataResponse', response);
+		});
+	});
+
+	socket.on('getVenues', function (request) {
+		var bounds = request.bounds; // region to query
+		var queryObject = {
+			coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}}
+		};
+
+		// perform and query and send results to client
+		Venue
+			.find(queryObject)
+			.sort({'oura': -1})
+			.limit(venueLimit)
+			.exec( function(err, results) {
+				var response = {venues: results};
+				socket.emit('getVenuesResponse', response);
 		});
 	});
 };

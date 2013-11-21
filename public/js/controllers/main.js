@@ -6,12 +6,14 @@ window.angular.module('oura.controllers.main', [])
 		var fullDataLimit = 150;
 		var updateDelay = 10000;
 		$scope.fullTweetLimit = 40;
+		$scope.venueLimit = 20;
 
 		var nextUpdatePromise;
 		var addPointPromiseArray = [];
 		google.maps.visualRefresh = true; // makes google maps look better
 		$scope.mapPoints = new google.maps.MVCArray(); // array containing datapoints (updates view automatically when adjusted)
 		$scope.shelfPoints = [];
+		$scope.venues = [];
 
 		// when a full data update arrives
 		socket.on('getFullDataResponse', function (response) {
@@ -63,6 +65,11 @@ window.angular.module('oura.controllers.main', [])
 				getNewData(bounds, lastUpdateDate);
 			}, updateDelay);
 		});
+
+		// when venue data arrives
+		socket.on('getVenuesResponse', function (response) {
+			$scope.venues = response.venues;
+		});
 		
 		// full data refresh
 		var getFullData = function (bounds, untilDate) {
@@ -87,12 +94,20 @@ window.angular.module('oura.controllers.main', [])
 			});
 		}
 
+		// get venues
+		var getVenues = function (bounds) {
+			socket.emit('getVenues', {
+				bounds: boundsToObject(bounds)
+			});
+		}
+
 		// called when map finishes being dragged or zoomed
 		$scope.mapIdle = function () {
 			var date = new Date(new Date() - updateDelay).setMilliseconds(0);
 			var bounds = $scope.map.getBounds();
 			getFullData(bounds, date);
 			getNewData(bounds, date);
+			getVenues(bounds);
 		}
 
 		// conversion between google.maps.LatLngBounds and json object

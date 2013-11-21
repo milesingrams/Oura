@@ -36,6 +36,7 @@
     , "cron": "*"
     , "ntwitter": "*"
     , "socket.io": "*"
+    , "foursquarevenues": "*"
   }
   , "devDependencies": {
         "supertest": "latest"

@@ -177,6 +177,30 @@ html, body{
   color: #0084B4;
 }
 
+
+/* VENUE STYLING */
+
+
+.venue {
+  display: block;
+  -webkit-animation: fadein 1s ease;
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 9px 12px;
+  position: relative;
+  width: 360px;
+  box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+}
+
+.venue:hover {
+  background: #F5F5F5;
+}
+
+.venue > .content {
+  margin-left: 50px;
+}
+
 @media (max-width: 978px) {
     body {
       padding:0;
