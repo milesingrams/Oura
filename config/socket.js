@@ -11,10 +11,22 @@ module.exports = function (socket) {
 	socket.on('getFullData', function (request) {
 		var bounds = request.bounds; // region to query
 		var untilDate = new Date(request.untilDate);
-		var queryObject = {
-			coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}},
-			saved_at: {$lt: untilDate}
-		};
+		var queryObject;
+
+		if (bounds.sw.lng > bounds.ne.lng) {
+			queryObject = {
+				$or: [
+					{coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [180, bounds.ne.lat]]}}},
+					{coordinates: {$geoWithin: {$box: [[-180, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}}}
+					],
+				saved_at: {$lt: untilDate}
+			};
+		} else {
+			queryObject = {
+				coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}},
+				saved_at: {$lt: untilDate}
+			};
+		}
 
 		// perform and query and send results to client
 		Tweet
@@ -40,10 +52,22 @@ module.exports = function (socket) {
 		var bounds = request.bounds; // region to query
 		var sinceDate = new Date(request.sinceDate);
 		var queryDate = new Date().setMilliseconds(0);
-		var queryObject = {
-			coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}},
-			saved_at: {$gte: sinceDate}
-		};
+		var queryObject;
+
+		if (bounds.sw.lng > bounds.ne.lng) {
+			queryObject = {
+				$or: [
+					{coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [180, bounds.ne.lat]]}}},
+					{coordinates: {$geoWithin: {$box: [[-180, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}}}
+					],
+				saved_at: {$gte: sinceDate}
+			};
+		} else {
+			queryObject = {
+				coordinates: {$geoWithin: {$box: [[bounds.sw.lng, bounds.sw.lat], [bounds.ne.lng, bounds.ne.lat]]}},
+				saved_at: {$gte: sinceDate}
+			};
+		}
 
 		// perform and query and send results to client
 		Tweet

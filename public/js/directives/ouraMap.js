@@ -45,7 +45,7 @@ window.angular.module('oura.directives.ouraMap', [])
 
             // sets options for map
             var mapOptions = {
-                zoom: 10,
+                zoom: 6,
                 minZoom: 1,
                 center: new google.maps.LatLng(40.7, -74),
                 disableDefaultUI: true,
