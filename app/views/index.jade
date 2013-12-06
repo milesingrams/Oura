@@ -5,9 +5,9 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', itemscope='itemscope', ite
 			div.interface(ng-controller="InterfaceController")
 				div.top-bar
 					a(href="/" id="logo")
-				div.shelf(ng-class="{closed: shelfClosed}")
-					div.shelfHandle(ng-click="shelfClosed=!shelfClosed")
-					div.content
-						tweet.tweet(ng-repeat="tweet in shelfPoints | limitTo: fullTweetLimit" tweet="tweet" map="map" ng-mouseenter="addToMap()" ng-mouseleave="removeFromMap()")
+				div.sidebar(ng-class="{closed: sidebarClosed}")
+					div.sidebar-handle(ng-click="sidebarClosed=!sidebarClosed")
+					div.sidebar-content
+						sidebar-tweet.stweet(ng-repeat="tweet in fullTweets | limitTo: fullTweetLimit" tweet="tweet" map="map" ng-mouseenter="addToMap()" ng-mouseleave="removeFromMap()")
 			div(oura-map id="map-canvas")
 		include ./includes/foot

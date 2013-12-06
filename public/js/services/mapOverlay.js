@@ -14,10 +14,9 @@ window.angular.module('oura.services.mapOverlay', [])
     }
 
     MapOverlay.prototype.onAdd = function() {
-
       this.elem_ = $compile(this.template_)(this.scope_)[0];
+      this.scope_.$digest();
       this.elem_.style.position = 'absolute';
-
       // Add the element to the "overlayLayer" pane.
       var panes = this.getPanes();
       panes.overlayImage.appendChild(this.elem_);

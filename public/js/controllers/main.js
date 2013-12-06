@@ -11,7 +11,8 @@ window.angular.module('oura.controllers.main', [])
 		var addPointPromiseArray = [];
 		google.maps.visualRefresh = true; // makes google maps look better
 		$scope.mapPoints = new google.maps.MVCArray(); // array containing datapoints (updates view automatically when adjusted)
-		$scope.shelfPoints = [];
+		$scope.fullTweets = [];
+		$scope.localTweets = [];
 
 		// when a full data update arrives
 		socket.on('getFullDataResponse', function (response) {
@@ -21,48 +22,47 @@ window.angular.module('oura.controllers.main', [])
 
 			// clear array
 			$scope.mapPoints.clear();
-			$scope.shelfPoints = [];
-			$scope.localPoints = [];
+			$scope.fullTweets = [];
 
 			// add points to array
 			angular.forEach(points, function (point) {
 				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
-				var heatMapPoint = {location: location, weight: 0.3};
-				$scope.mapPoints.push(heatMapPoint);
+				var mapPointObj = {location: location, weight: 0.3};
+				$scope.mapPoints.push(mapPointObj);
 			});
 
-			angular.forEach(fullTweets, function (point) {
-				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
-				var shelfPoint = {location: location, data: point};
-				$scope.shelfPoints.push(shelfPoint);
+			angular.forEach(fullTweets, function (tweet) {
+				var location = new google.maps.LatLng(tweet.coordinates[1], tweet.coordinates[0]);
+				var fullTweetObj = {location: location, data: tweet};
+				$scope.fullTweets.push(fullTweetObj);
 			});
 		});
 
 		// when new data arrives
 		socket.on('getNewDataResponse', function (response) {
-			var points = response.fullTweets;
+			var fullTweets = response.fullTweets;
 			var bounds = objectToBounds(response.bounds);
 			var sinceDate = new Date(response.sinceDate);
 			var lastUpdateDate = new Date(response.queryDate);
 
 			// begin timers to add points exactly updateDelay milliseconds after they are created
-			angular.forEach(points, function (point) {
-				var location = new google.maps.LatLng(point.coordinates[1], point.coordinates[0]);
-				var heatMapPoint = {location: location, weight: 0.3};
-				var shelfPoint = {location: location, data: point};
-				var timeDiff = new Date(point.saved_at) - sinceDate;
+			angular.forEach(fullTweets, function (tweet) {
+				var location = new google.maps.LatLng(tweet.coordinates[1], tweet.coordinates[0]);
+				var mapPointObj = {location: location, weight: 0.3};
+				var fullTweetObj = {location: location, data: tweet};
+				var timeDiff = new Date(tweet.saved_at) - sinceDate;
 
 				var addPointPromise = $timeout(function () {
 					addMapPing(location);
 
-					$scope.mapPoints.insertAt(0, heatMapPoint);
+					$scope.mapPoints.insertAt(0, mapPointObj);
 					if ($scope.mapPoints.getLength() > fullDataLimit) {
 						$scope.mapPoints.pop();
 					}
 
-					$scope.shelfPoints.unshift(shelfPoint);
-					if ($scope.shelfPoints.length > $scope.fullTweetLimit) {
-						$scope.shelfPoints.pop();
+					$scope.fullTweets.unshift(fullTweetObj);
+					if ($scope.fullTweets.length > $scope.fullTweetLimit) {
+						$scope.fullTweets.pop();
 					}
 				}, timeDiff);
 
@@ -77,11 +77,19 @@ window.angular.module('oura.controllers.main', [])
 
 		// when new data arrives
 		socket.on('getDataNearPointResponse', function (response) {
-			$scope.localPoints = response.fullTweets;
+			var fullTweets = response.fullTweets;
 			var location = objectToLocation(response.location);
 			var radius = response.radius;
-			if ($scope.localPoints.length > 0) {
-				addTweetBox(location);
+
+			$scope.localTweets = [];
+
+			if (fullTweets.length > 0) {
+				angular.forEach(fullTweets, function (tweet) {
+					var location = new google.maps.LatLng(tweet.coordinates[1], tweet.coordinates[0]);
+					var fullTweetObj = {location: location, data: tweet};
+					$scope.localTweets.push(fullTweetObj);
+				});
+				addMapbox(location);
 			}
 		});
 		
@@ -124,10 +132,19 @@ window.angular.module('oura.controllers.main', [])
 			getNewData(bounds, date);
 		}
 
+		$scope.mapZoomed = function (event) {
+			if ($scope.mapbox) {
+                mapOverlay.destroy($scope.mapbox);
+            }
+		}
+
 		// called when map is clicked but not dragged
 		$scope.mapClicked = function (event) {
+			if ($scope.mapbox) {
+                mapOverlay.destroy($scope.mapbox);
+            }
 			var mouseLocation = event.latLng;
-			var radius = 0.3/Math.pow(2, $scope.map.getZoom());
+			var radius = 0.25/Math.pow(2, $scope.map.getZoom());
 			getDataNearPoint(mouseLocation, radius);
 		}
 
@@ -161,13 +178,9 @@ window.angular.module('oura.controllers.main', [])
             }, 1500);
         };
 
-        // Adds a tweetBox to the map with tweets at a location
-        var addTweetBox = function (location) {
-            if ($scope.tweetBox) {
-                mapOverlay.destroy($scope.tweetBox);
-            }
-
-            var template = "<map-tweet-box class='map-tweet-box' tweets={{localTweets}}></map-tweet-box>";
-            $scope.tweetBox = mapOverlay.create(location, $scope.map, $scope, template);
+        // Adds a mapbox to the map with tweets at a location
+        var addMapbox = function (location) {
+            var template = "<mapbox class='mapbox'><mapbox-tweet class='mtweet' ng-repeat='tweet in localTweets | limitTo: 4' tweet='tweet' map='map'></mapbox-tweet></mapbox>";
+            $scope.mapbox = mapOverlay.create(location, $scope.map, $scope, template);
         };
 	}]);

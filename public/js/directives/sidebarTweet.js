@@ -1,5 +1,5 @@
-window.angular.module('oura.directives.tweet', [])
-  .directive('tweet', ['mapOverlay',
+window.angular.module('oura.directives.sidebarTweet', [])
+  .directive('sidebarTweet', ['mapOverlay',
     function(mapOverlay) {
     	return {
     		restrict: 'E',
@@ -7,7 +7,7 @@ window.angular.module('oura.directives.tweet', [])
     			tweet: '=tweet',
                 map: '=map'
     		},
-    		templateUrl: '/templates/tweet.html',
+    		templateUrl: '/templates/sidebarTweet.html',
             link: function (scope, element) {
                 scope.ouraLevel = Math.floor(Math.random()*3 + 0.5);
                 var boxShadows = [];

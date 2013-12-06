@@ -75,7 +75,7 @@ html, body{
 }
 
 /* SHELF STYLING */
-.shelf {
+.sidebar {
   position: absolute;
   top: 62px;
   left: -1px;
@@ -87,22 +87,22 @@ html, body{
   transition: left 0.3s ease;
 }
 
-.shelf.closed {
+.sidebar.closed {
   left: -380px;
 }
 
-.shelf > .content {
+.sidebar-content{
   position: absolute;
   width: 380px;
   padding: 0 10px;
   top: 0;
   left: 0;
   bottom: 0;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 
-.shelfHandle {
+.sidebar-handle {
   position: absolute;
   top: 0px;
   right: -49px;
@@ -110,7 +110,7 @@ html, body{
   height: 49px;
   color: #ccc;
 }
-.shelfHandle:hover {
+.sidebar-handle:hover {
 }
 
 @-webkit-keyframes fadein {
@@ -122,46 +122,46 @@ html, body{
     }
 }
 
-/* TWEET STYLING */
+/* SIDEBAR-TWEET STYLING */
 
-.tweet {
-  display: block;
+.stweet {
   -webkit-animation: fadein 1s ease;
-  background: #fff;
+  display: block;
+  position: relative;
   margin-top: 10px;
   padding: 9px 12px;
-  position: relative;
-  width: 360px;
+  width: 100%;
+  background: #fff;
   box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.4);
   border-radius: 5px;
 }
 
-.tweet:hover {
+.stweet:hover {
   background: #F5F5F5;
 }
 
-.tweet > .content {
+.stweet-content {
   margin-left: 50px;
 }
 
-.profile-group:hover {
+.stweet-profile-group:hover {
   text-decoration: none;
 }
 
-.profile-group .name {
+.stweet-name {
   color: #333;
 }
 
-.profile-group:hover .name {
+.stweet-profile-group:hover .stweet-name {
   text-decoration: underline;
 }
 
-.profile-group .screen-name {  
+.stweet-screen-name {  
   font-size: 12px;
   color: #999;
 }
 
-.profile-group .profile-img {
+.stweet-profile-img {
   float: left;
   margin-top: 3px;
   margin-left: -48px;
@@ -170,12 +170,82 @@ html, body{
   border-radius: 19px;
 }
 
-.tweet .tweet-text {
+.stweet-text {
   white-space: pre-wrap;
 }
 
-.tweet .tweet-text a {
+.stweet-text a {
   color: #0084B4;
+}
+
+/* MAPBOX STYLING */
+.mapbox {
+  z-index: 1000;
+}
+
+.mapbox-content {
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 300px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.mapbox-arrow {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  border-color: transparent #fff transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.mapbox-arrow-shadow {
+  position: absolute;
+  top: -11px;
+  left: -12px;
+  border-color: transparent rgba(0, 0, 0, 0.5) transparent transparent;
+  border-style: solid;
+  border-width: 11px;
+}
+
+/* MAPBOX TWEET STYLING */
+
+.mtweet {
+  display: block;
+  position: relative;
+  padding: 3px 8px;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #EDEDED;
+}
+
+.mtweet-profile-group:hover {
+  text-decoration: none;
+}
+
+.mtweet-name {
+  color: #333;
+}
+
+.mtweet-profile-group:hover .mtweet-name {
+  text-decoration: underline;
+}
+
+.mtweet-screen-name {  
+  color: #999;
+}
+
+.mtweet-text {
+  white-space: pre-wrap;
+  font-size: 12;
+}
+
+.mtweet-text a {
+  color: #0084B4;
+  font-size: inherit;
 }
 
 @media (max-width: 978px) {

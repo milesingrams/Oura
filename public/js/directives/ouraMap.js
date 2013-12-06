@@ -77,6 +77,12 @@ window.angular.module('oura.directives.ouraMap', [])
                 });
             });
 
+            google.maps.event.addListener(scope.map, 'zoom_changed', function (event) {
+                scope.$apply(function () {
+                    scope.mapZoomed(event);
+                });
+            });
+
             google.maps.event.addListener(scope.map, 'click', function (event) {
                 scope.$apply(function () {
                     scope.mapClicked(event);
