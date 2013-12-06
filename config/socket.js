@@ -7,6 +7,7 @@ module.exports = function (socket) {
 	var fullDataLimit = 150;
 	var newDataLimit = 15;
 	var fullTweetsPerUpdate = 10;
+	var tweetsNearPointLimit = 4;
 
 	socket.on('getFullData', function (request) {
 		var bounds = request.bounds; // region to query
@@ -76,6 +77,24 @@ module.exports = function (socket) {
 			.exec( function(err, results) {
 				var response = {fullTweets: results, bounds: bounds, sinceDate: sinceDate, queryDate: queryDate};
 				socket.emit('getNewDataResponse', response);
+		});
+	});
+
+	socket.on('getDataNearPoint', function (request) {
+		var location = request.location; // location to query
+		var radius = request.radius;
+		var queryObject = {
+			coordinates: {$geoWithin: {$centerSphere: [[location.lng, location.lat], radius]}}
+		};
+
+		// perform and query and send results to client
+		Tweet
+			.find(queryObject)
+			.sort({'$natural': -1})
+			.limit(tweetsNearPointLimit)
+			.exec( function(err, results) {
+				var response = {fullTweets: results, location: location, radius: radius};
+				socket.emit('getDataNearPointResponse', response);
 		});
 	});
 };

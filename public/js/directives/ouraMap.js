@@ -55,23 +55,33 @@ window.angular.module('oura.directives.ouraMap', [])
             // creates new map on the directive element
             scope.map = new google.maps.Map(element[0], mapOptions);
 
+            // Make an overlay so screen position can be derived from location
+            function CanvasProjectionOverlay(){};
+            CanvasProjectionOverlay.prototype = new google.maps.OverlayView();
+            CanvasProjectionOverlay.prototype.constructor = CanvasProjectionOverlay;
+            CanvasProjectionOverlay.prototype.onAdd = function(){};
+            CanvasProjectionOverlay.prototype.draw = function(){};
+            CanvasProjectionOverlay.prototype.onRemove = function(){};
+            var canvasProjectionOverlay = new CanvasProjectionOverlay();
+            canvasProjectionOverlay.setMap(scope.map);
+
+            scope.getPixelFromLocation = function (location) {
+                var pos = canvasProjectionOverlay.getProjection().fromLatLngToDivPixel(location);
+                return pos;
+            }
+
             // called when map finished being dragged or zoomed
-            google.maps.event.addListener(scope.map, 'idle', function () {
-                if (this.getBounds())
+            google.maps.event.addListener(scope.map, 'idle', function (event) {
                 scope.$apply(function () {
-                    scope.mapIdle();
+                    scope.mapIdle(event);
                 });
             });
-      
-            scope.addPing = function (location) {
 
-                var ping = new PingOverlay(location, scope.map);
-
-                $timeout(function () {
-                    ping.setMap(null);
-                }, 1500);
-            };
-
+            google.maps.event.addListener(scope.map, 'click', function (event) {
+                scope.$apply(function () {
+                    scope.mapClicked(event);
+                });
+            });
 
             // HEATMAP CODE -----------------------------------------------------
 

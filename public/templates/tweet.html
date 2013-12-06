@@ -1,12 +1,12 @@
-<div class="content" ng-mouseenter="addToMap()" ng-mouseleave="removeFromMap()">
+<div class="content">
 	<div class="tweet-header">
-		<a class="profile-group" target="_blank" ng-href="http://twitter.com/{{tweet.user.screen_name}}">
-			<img class="profile-img" ng-src="{{tweet.user.profile_image_url}}" ng-style="ouraStyle"></img>
-			<strong class="name"> {{tweet.user.name}} </strong>
+		<a class="profile-group" target="_blank" ng-href="http://twitter.com/{{tweet.data.user.screen_name}}">
+			<img class="profile-img" ng-src="{{tweet.data.user.profile_image_url}}" ng-style="ouraStyle"></img>
+			<strong class="name"> {{tweet.data.user.name}} </strong>
 			<span class="screen-name">
 				<b>@{{tweet.user.screen_name}} </b>
 			</span>
 		</a>
 	</div>
-	<p class="tweet-text" ng-bind-html="tweet.text | parseUrl | parseUsername | parseHashtag"></p>
+	<p class="tweet-text" ng-bind-html="tweet.data.text | parseUrl | parseUsername | parseHashtag"></p>
 </div>

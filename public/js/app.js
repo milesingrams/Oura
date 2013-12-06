@@ -2,6 +2,6 @@ window.app = angular.module('ouraApp', ['ngCookies', 'ngSanitize', 'ngResource',
 
 // bundling dependencies
 window.angular.module('oura.controllers', ['oura.controllers.main', 'oura.controllers.interface']);
-window.angular.module('oura.services', ['oura.services.socket']);
+window.angular.module('oura.services', ['oura.services.mapOverlay', 'oura.services.socket']);
 window.angular.module('oura.filters', ['oura.filters.parseUrl', 'oura.filters.parseUsername', 'oura.filters.parseHashtag']);
 window.angular.module('oura.directives', ['oura.directives.ouraMap', 'oura.directives.tweet']);
