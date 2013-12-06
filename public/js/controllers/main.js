@@ -22,6 +22,7 @@ window.angular.module('oura.controllers.main', [])
 			// clear array
 			$scope.mapPoints.clear();
 			$scope.shelfPoints = [];
+			$scope.localPoints = [];
 
 			// add points to array
 			angular.forEach(points, function (point) {
@@ -76,11 +77,11 @@ window.angular.module('oura.controllers.main', [])
 
 		// when new data arrives
 		socket.on('getDataNearPointResponse', function (response) {
-			var points = response.fullTweets;
+			$scope.localPoints = response.fullTweets;
 			var location = objectToLocation(response.location);
 			var radius = response.radius;
-			if (points.length > 0) {
-				$scope.addTweetBox(location, points);
+			if ($scope.localPoints.length > 0) {
+				addTweetBox(location);
 			}
 		});
 		
@@ -160,13 +161,13 @@ window.angular.module('oura.controllers.main', [])
             }, 1500);
         };
 
-        /*
         // Adds a tweetBox to the map with tweets at a location
-        var addTweetBox = function (location, tweets) {
+        var addTweetBox = function (location) {
             if ($scope.tweetBox) {
-                $scope.tweetBox.setMap(null);
+                mapOverlay.destroy($scope.tweetBox);
             }
-            $scope.tweetBox = new TweetBoxOverlay(location, $scope.map, tweets);
+
+            var template = "<map-tweet-box class='map-tweet-box' tweets={{localTweets}}></map-tweet-box>";
+            $scope.tweetBox = mapOverlay.create(location, $scope.map, $scope, template);
         };
-        */
 	}]);
