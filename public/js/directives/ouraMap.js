@@ -89,6 +89,8 @@ window.angular.module('oura.directives.ouraMap', [])
                 });
             });
 
+            
+
             // HEATMAP CODE -----------------------------------------------------
 
             // defines a custom heatmap gradient

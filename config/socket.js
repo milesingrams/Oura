@@ -32,7 +32,7 @@ module.exports = function (socket) {
 		// perform and query and send results to client
 		Tweet
 			.find(queryObject)
-			.sort({'$natural': -1})
+			.sort({'saved_at': -1})
 			.limit(fullDataLimit)
 			.exec( function(err, results) {
 				var fullTweets = [];
@@ -90,7 +90,7 @@ module.exports = function (socket) {
 		// perform and query and send results to client
 		Tweet
 			.find(queryObject)
-			.sort({'$natural': -1})
+			.sort({'saved_at': -1})
 			.limit(tweetsNearPointLimit)
 			.exec( function(err, results) {
 				var response = {fullTweets: results, location: location, radius: radius};

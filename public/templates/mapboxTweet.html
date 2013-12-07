@@ -2,10 +2,8 @@
 	<div class="mtweet-header">
 		<a class="mtweet-profile-group" target="_blank" ng-href="http://twitter.com/{{tweet.data.user.screen_name}}">
 			<strong class="mtweet-name"> {{tweet.data.user.name}} </strong>
-			<span class="mtweet-screen-name">
-				<b>@{{tweet.data.user.screen_name}} </b>
-			</span>
 		</a>
+		<span class="mtweet-time">{{timeText}}</span>
 	</div>
 	<p class="mtweet-text" ng-bind-html="tweet.data.text | parseUrl | parseUsername | parseHashtag"></p>
 </div>

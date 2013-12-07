@@ -227,6 +227,7 @@ html, body{
 }
 
 .mtweet-name {
+  font-size: 12;
   color: #333;
 }
 
@@ -236,6 +237,11 @@ html, body{
 
 .mtweet-screen-name {  
   color: #999;
+}
+
+.mtweet-time {
+  color: #999;
+  float: right;
 }
 
 .mtweet-text {
