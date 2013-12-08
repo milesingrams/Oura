@@ -1,12 +1,14 @@
-<div class="stweet-content">
-	<div class="stweet-header">
-		<a class="stweet-profile-group" target="_blank" ng-href="http://twitter.com/{{tweet.data.user.screen_name}}">
-			<img class="stweet-profile-img" ng-src="{{tweet.data.user.profile_image_url}}" ng-style="ouraStyle"></img>
-			<strong class="stweet-name"> {{tweet.data.user.name}} </strong>
-			<span class="stweet-screen-name">
-				<b>@{{tweet.data.user.screen_name}} </b>
-			</span>
-		</a>
+<div class="stweet" ng-mouseenter="addToMap()" ng-mouseleave="removeFromMap()" ng-click= "moveToTweet()">
+	<div class="stweet-content">
+		<div class="stweet-header">
+			<a class="stweet-profile-group" target="_blank" ng-href="http://twitter.com/{{tweet.data.user.screen_name}}">
+				<img class="stweet-profile-img" ng-src="{{tweet.data.user.profile_image_url}}" ng-style="ouraStyle"></img>
+				<strong class="stweet-name"> {{tweet.data.user.name}} </strong>
+				<span class="stweet-screen-name">
+					<b> @{{tweet.data.user.screen_name}} </b>
+				</span>
+			</a>
+		</div>
+		<p class="stweet-text" ng-bind-html="tweet.data.text | parseUrl | parseUsername | parseHashtag"></p>
 	</div>
-	<p class="stweet-text" ng-bind-html="tweet.data.text | parseUrl | parseUsername | parseHashtag"></p>
 </div>

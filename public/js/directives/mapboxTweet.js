@@ -4,7 +4,8 @@ window.angular.module('oura.directives.mapboxTweet', [])
     	return {
     		restrict: 'E',
     		scope: {
-    			tweet: '=tweet'
+    			tweet: '=tweet',
+                map: '=map'
     		},
     		templateUrl: '/templates/mapboxTweet.html',
             link: function (scope) {
@@ -13,6 +14,11 @@ window.angular.module('oura.directives.mapboxTweet', [])
                     scope.timeText = "just now";
                 } else {
                     scope.timeText = minSince + " mins ago";
+                }
+
+                scope.moveToTweet = function () {
+                    scope.map.panTo(scope.tweet.location);
+                    scope.map.setZoom(17);
                 }
             }   
     	}

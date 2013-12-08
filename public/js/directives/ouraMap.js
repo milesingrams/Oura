@@ -72,24 +72,16 @@ window.angular.module('oura.directives.ouraMap', [])
 
             // called when map finished being dragged or zoomed
             google.maps.event.addListener(scope.map, 'idle', function (event) {
-                scope.$apply(function () {
-                    scope.mapIdle(event);
-                });
+                scope.mapIdle(event);
             });
 
             google.maps.event.addListener(scope.map, 'zoom_changed', function (event) {
-                scope.$apply(function () {
-                    scope.mapZoomed(event);
-                });
+                scope.mapZoomed(event);
             });
 
             google.maps.event.addListener(scope.map, 'click', function (event) {
-                scope.$apply(function () {
-                    scope.mapClicked(event);
-                });
+                scope.mapClicked(event);
             });
-
-            
 
             // HEATMAP CODE -----------------------------------------------------
 

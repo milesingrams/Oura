@@ -113,7 +113,7 @@ html, body{
   display: block;
   position: relative;
   padding: 12px 12px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
 }
 
 .stweet:hover {
@@ -169,17 +169,17 @@ html, body{
   position: absolute;
   top: -20px;
   left: 10px;
-  border-radius: 5px;
   overflow: hidden;
-  width: 300px;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+  width: 320px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .mapbox-arrow {
   position: absolute;
   top: -10px;
   left: -10px;
-  border-color: transparent #fff transparent transparent;
+  border-color: transparent rgba(255, 255, 255, 0.95) transparent transparent;
   border-style: solid;
   border-width: 10px;
 }
@@ -199,10 +199,13 @@ html, body{
   cursor: default;
   display: block;
   position: relative;
-  padding: 3px 8px;
+  padding: 8px 12px;
   width: 100%;
-  background: #fff;
-  border-bottom: 1px solid #EDEDED;
+  border-bottom: 1px solid #ddd;
+}
+
+.mtweet:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .mtweet-profile-group:hover {

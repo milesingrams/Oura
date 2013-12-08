@@ -3,12 +3,14 @@ window.angular.module('oura.directives.sidebarTweet', [])
     function(mapOverlay) {
     	return {
     		restrict: 'E',
+            replace: true,
     		scope: {
     			tweet: '=tweet',
                 map: '=map'
     		},
     		templateUrl: '/templates/sidebarTweet.html',
-            link: function (scope, element) {
+            link: function (scope) {
+
                 /*
                 scope.ouraLevel = Math.floor(Math.random()*3 + 0.5);
                 var boxShadows = [];
@@ -17,13 +19,18 @@ window.angular.module('oura.directives.sidebarTweet', [])
                 }
                 scope.ouraStyle = {'box-shadow': boxShadows.join(", ")};
                 */
+
                 scope.addToMap = function () {
-                    var location = scope.tweet.location;
                     var template = "<img class='map-tweet' src='"+scope.tweet.data.user.profile_image_url+"'></img>";
-                    scope.mapTweet = mapOverlay.create(location, scope.map, scope, template);
+                    scope.mapTweet = mapOverlay.create(scope.tweet.location, scope.map, scope, template);
                 }
                 scope.removeFromMap = function () {
                     mapOverlay.destroy(scope.mapTweet);
+                }
+
+                scope.moveToTweet = function () {
+                    scope.map.panTo(scope.tweet.location);
+                    scope.map.setZoom(17);
                 }
 
                 scope.$on('$destroy', function() {

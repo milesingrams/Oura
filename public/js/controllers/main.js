@@ -7,6 +7,7 @@ window.angular.module('oura.controllers.main', [])
 		var updateDelay = 10000;
 		$scope.fullTweetLimit = 40;
 
+		var updatePromise;
 		var nextUpdatePromise;
 		var addPointPromiseArray = [];
 		google.maps.visualRefresh = true; // makes google maps look better
@@ -89,7 +90,7 @@ window.angular.module('oura.controllers.main', [])
 					var fullTweetObj = {location: location, data: tweet};
 					$scope.localTweets.push(fullTweetObj);
 				});
-				addMapbox(location);
+				addMapTweetBox(location);
 			}
 		});
 		
@@ -126,10 +127,13 @@ window.angular.module('oura.controllers.main', [])
 
 		// called when map finishes being dragged or zoomed
 		$scope.mapIdle = function (event) {
-			var date = new Date(new Date() - updateDelay).setMilliseconds(0);
-			var bounds = $scope.map.getBounds();
-			getFullData(bounds, date);
-			getNewData(bounds, date);
+			$timeout.cancel(updatePromise);
+			updatePromise = $timeout(function () {
+				var date = new Date(new Date() - updateDelay).setMilliseconds(0);
+				var bounds = $scope.map.getBounds();
+				getFullData(bounds, date);
+				getNewData(bounds, date);
+			}, 100);
 		}
 
 		$scope.mapZoomed = function (event) {
@@ -179,8 +183,8 @@ window.angular.module('oura.controllers.main', [])
         };
 
         // Adds a mapbox to the map with tweets at a location
-        var addMapbox = function (location) {
-            var template = "<mapbox class='mapbox'><mapbox-tweet class='mtweet' ng-repeat='tweet in localTweets | limitTo: 4' tweet='tweet' map='map'></mapbox-tweet></mapbox>";
+        var addMapTweetBox = function (location) {
+            var template = "<mapbox class='mapbox'><mapbox-tweet ng-repeat='tweet in localTweets | limitTo: 4' tweet='tweet' map='map'></mapbox-tweet></mapbox>";
             $scope.mapbox = mapOverlay.create(location, $scope.map, $scope, template);
         };
 	}]);

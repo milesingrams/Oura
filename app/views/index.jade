@@ -6,7 +6,7 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', itemscope='itemscope', ite
 				//- a(href="/" id="logo")
 				div.sidebar(ng-class="{closed: sidebarClosed}")
 					div.sidebar-content
-						sidebar-tweet.stweet(ng-repeat="tweet in fullTweets | limitTo: fullTweetLimit" tweet="tweet" map="map" ng-mouseenter="addToMap()" ng-mouseleave="removeFromMap()")
+						sidebar-tweet.stweet(ng-repeat="tweet in fullTweets | limitTo: fullTweetLimit" tweet="tweet" map="map")
 			div(oura-map id="map-canvas")
 		include ./includes/foot
 		script(src="http://localhost:35729/livereload.js")
