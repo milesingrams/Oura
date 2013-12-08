@@ -214,6 +214,7 @@ html, body{
 /* MAPBOX TWEET STYLING */
 
 .mtweet {
+  cursor: default;
   display: block;
   position: relative;
   padding: 3px 8px;
