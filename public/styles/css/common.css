@@ -1,14 +1,18 @@
 * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-html, body{
-  height:100%; 
+html,
+body {
+  height: 100%;
 }
 
-/* MAP STYILING */
+/* MAP STYLING */
+
 #map-canvas {
-  height: calc(100% - 62px);
+  height: 100%;
 }
 
 #map-canvas img {
@@ -18,48 +22,86 @@ html, body{
 @-webkit-keyframes ping {
   from {
     -webkit-transform: scale(0.25);
+    transform: scale(0.25);
     opacity: 1.0;
   }
+
   to {
-    -webkit-transform: scale(1.0);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes ping {
+  from {
+    -webkit-transform: scale(0.25);
+    -ms-transform: scale(0.25);
+    transform: scale(0.25);
+    opacity: 1.0;
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
     opacity: 0;
   }
 }
 
 #map-canvas .ping {
   -webkit-animation: ping 1.5s ease;
+  animation: ping 1.5s ease;
   border: 6px solid #fff;
+  -webkit-box-shadow: inset 0 0 5px #FA0096;
   box-shadow: inset 0 0 5px #FA0096;
-
   width: 40px;
   height: 40px;
   margin-left: -20px;
-  margin-top: -20px; 
+  margin-top: -20px;
   border-radius: 20px;
 }
 
 @-webkit-keyframes pop-in {
   from {
     -webkit-transform: scale(0.7);
+    transform: scale(0.7);
   }
+
   to {
-    -webkit-transform: scale(1.0);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    transform: scale(0.7);
+  }
+
+  to {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
   }
 }
 
 #map-canvas .map-tweet {
   -webkit-animation: pop-in 0.25s ease;
+  animation: pop-in 0.25s ease;
   background: #333;
   border: 3px solid #333;
-
   width: 40px;
   height: 40px;
   margin-left: -20px;
-  margin-top: -20px; 
+  margin-top: -20px;
   border-radius: 20px;
 }
 
 /* TOP BAR STYLING */
+
 .top-bar {
   width: 100%;
   height: 62px;
@@ -67,7 +109,7 @@ html, body{
 }
 
 #logo {
-  background: url('/img/oura-logo.png') no-repeat;
+  background: url("/img/oura-logo.png") no-repeat;
   display: inline-block;
   margin-left: 9px;
   height: 62px;
@@ -75,31 +117,26 @@ html, body{
 }
 
 /* SHELF STYLING */
+
 .sidebar {
   position: absolute;
-  top: 62px;
-  left: -1px;
-  width: 380px;
-  height: calc(100% - 62px);
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+  left: 40px;
+  width: 400px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  -webkit-transition: left 0.3s ease;
   transition: left 0.3s ease;
 }
 
 .sidebar.closed {
-  left: -380px;
+  left: -400px;
 }
 
-.sidebar-content{
-  position: absolute;
-  width: 380px;
-  padding: 0 10px;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  overflow-y: hidden;
-  overflow-x: hidden;
+.sidebar-content {
+  height: 100%;
 }
 
 .sidebar-handle {
@@ -110,38 +147,44 @@ html, body{
   height: 49px;
   color: #ccc;
 }
-.sidebar-handle:hover {
-}
 
 @-webkit-keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1; 
-    }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* SIDEBAR-TWEET STYLING */
 
 .stweet {
   -webkit-animation: fadein 1s ease;
+  animation: fadein 1s ease;
   display: block;
   position: relative;
-  margin-top: 10px;
-  padding: 9px 12px;
-  width: 100%;
-  background: #fff;
-  box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
+  padding: 15px 12px;
+  border-bottom: 1px solid #ccc;
 }
 
 .stweet:hover {
-  background: #F5F5F5;
+  background-color: rgba(255, 0, 150, 0.05);
 }
 
 .stweet-content {
-  margin-left: 50px;
+  margin-left: 20px;
 }
 
 .stweet-profile-group:hover {
@@ -156,18 +199,18 @@ html, body{
   text-decoration: underline;
 }
 
-.stweet-screen-name {  
+.stweet-screen-name {
   font-size: 12px;
   color: #999;
 }
 
 .stweet-profile-img {
-  float: left;
-  margin-top: 3px;
-  margin-left: -48px;
-  width: 34px;
-  height: 34px;
-  border-radius: 19px;
+  position: absolute;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 3px solid #333;
 }
 
 .stweet-text {
@@ -179,6 +222,7 @@ html, body{
 }
 
 /* MAPBOX STYLING */
+
 .mapbox {
   z-index: 1000;
 }
@@ -190,6 +234,7 @@ html, body{
   border-radius: 5px;
   overflow: hidden;
   width: 300px;
+  -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
 }
 
@@ -236,7 +281,7 @@ html, body{
   text-decoration: underline;
 }
 
-.mtweet-screen-name {  
+.mtweet-screen-name {
   color: #999;
 }
 
@@ -256,7 +301,7 @@ html, body{
 }
 
 @media (max-width: 978px) {
-    body {
-      padding:0;
-    }
+  body {
+    padding: 0;
+  }
 }
