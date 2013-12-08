@@ -33,9 +33,9 @@
     "forever": "latest",
     "mean-logger": "latest",
     "bower": "latest",
-    "cron": "*",
-    "ntwitter": "*",
-    "socket.io": "*"
+    "cron": "latest",
+    "ntwitter": "latest",
+    "socket.io": "latest"
   },
   "devDependencies": {
     "supertest": "latest",
@@ -46,6 +46,8 @@
     "grunt-contrib-sass": "~0.5.1",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-autoprefixer": "~0.4.1"
+    "grunt-autoprefixer": "~0.4.1",
+    "grunt-concurrent": "~0.4.2",
+    "grunt-nodemon": "~0.1.2"
   }
 }

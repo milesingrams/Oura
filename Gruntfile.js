@@ -1,6 +1,6 @@
 module.exports = function (grunt) { 
 
-	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('default', ['concurrent']);
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -8,6 +8,9 @@ module.exports = function (grunt) {
 		watch: {
 			options: {
 				livereload: true
+			},
+			html: {
+				files: 'app/views/**/*'
 			},
 			css: {
 				files: 'public/styles/scss/*.scss',
@@ -17,8 +20,22 @@ module.exports = function (grunt) {
 				files: 'public/js/**/*.js'
 			}
 		},
-		sass: {                              // Task
-			dist: {                            // Target
+		nodemon: {
+			dev: {
+				options: {
+					file: 'server.js',
+					args: ['dev'],
+					nodeArgs: ['--debug'],
+					ignoredFiles: ['node_modules/**', 'bower_components/**', 'public/**', 'Gruntfile.js'],
+					watchedExtensions: ['js'],
+					env: {
+						PORT: '3000'
+					}
+				}
+			}
+		},
+		sass: {
+			dist: {
 				files: [{
 					expand: true,
 					cwd: 'public/styles/scss',
@@ -32,11 +49,21 @@ module.exports = function (grunt) {
 			no_dest: {
 				src: 'public/styles/css/common.css'
 			}
+		},
+		concurrent: {
+			dev: {
+				tasks: ['nodemon', 'watch'],
+				options: {
+					logConcurrentOutput: true
+				}
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-nodemon');
+	grunt.loadNpmTasks('grunt-concurrent');
 
 };
