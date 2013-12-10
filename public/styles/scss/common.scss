@@ -85,10 +85,10 @@ html, body{
 /* SIDEBAR STYLING ****************************************************************/
 .sidebar {
   position: absolute;
-  left: 20px;
+  left: 0px;
   top: 0px;
-  width: 400px;
-  padding: 0 20px;
+  width: 440px;
+  padding: 0 40px;
   height: 100%;
   z-index: 1000;
   transition: left 0.3s ease;
@@ -164,13 +164,12 @@ html, body{
 .stweet-text {
   font-size: inherit;
   white-space: pre-wrap;
-}
 
-.stweet-text a {
-  font-size: inherit;
-  color: #0084B4;
+  a {
+    font-size: inherit;
+    color: #0084B4;
+  }
 }
-
 
 
 /* MAPBOX STYLING *****************************************************************/
@@ -249,11 +248,11 @@ html, body{
 .mtweet-text {
   white-space: pre-wrap;
   font-size: inherit;
-}
 
-.mtweet-text a {
-  color: #0084B4;
-  font-size: inherit;
+  a {
+    color: #0084B4;
+    font-size: inherit;
+  }
 }
 
 
@@ -268,8 +267,7 @@ html, body{
 
 @media (max-width : 768px) {
   .sidebar {
-    left: 5%;
-    width: 90%;
+    width: 100%;
     top: 50%;
     height: 50%;
   }

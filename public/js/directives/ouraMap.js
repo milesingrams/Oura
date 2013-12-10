@@ -10,36 +10,6 @@ window.angular.module('oura.directives.ouraMap', [])
                     stylers: [
                         { visibility: "off" }
                     ]
-                },{
-                    featureType: "transit",
-                    stylers: [
-                        { visibility: "off" }
-                    ]
-                },{
-                    featureType: "landscape",
-                    stylers: [
-                        { saturation: -100 },
-                        { lightness: 40 }
-                    ]
-                },{
-                    featureType: "road",
-                    stylers: [
-                        { saturation: -100 }
-                    ]
-                },{
-                    featureType: "road",
-                    elementType: "geometry",
-                    stylers: [
-                        { visibility: "simplified" },
-                        { lightness: 40 }
-                    ]
-                },{
-                    featureType: "poi",
-                    elementType: "geometry",
-                    stylers: [
-                        { visibility: "simplified" },
-                        { lightness: 40 }
-                    ]
                 }
             ];
 
@@ -95,6 +65,9 @@ window.angular.module('oura.directives.ouraMap', [])
                 'rgba(255, 0, 150, 0.25)',
                 'rgba(255, 0, 150, 0.25)',
                 'rgba(255, 0, 150, 0.25)',
+                'rgba(255, 0, 150, 0.25)',
+                'rgba(255, 0, 150, 0.25)',
+                'rgba(255, 0, 150, 0.5)',
                 'rgba(255, 0, 150, 0.5)',
                 'rgba(255, 0, 150, 0.5)',
                 'rgba(255, 0, 150, 0.5)',
@@ -103,7 +76,6 @@ window.angular.module('oura.directives.ouraMap', [])
                 'rgba(255, 0, 150, 0.75)',
                 'rgba(255, 0, 150, 0.75)',
                 'rgba(255, 0, 150, 0.75)',
-                'rgba(255, 0, 150, 1)',
                 'rgba(255, 0, 150, 1)',
                 'rgba(255, 0, 150, 1)',
                 'rgba(255, 0, 150, 1)'
@@ -111,13 +83,13 @@ window.angular.module('oura.directives.ouraMap', [])
 
             // creates a new heatmap layer with data from the scope
             scope.heatmap = new google.maps.visualization.HeatmapLayer({
-                data: scope.mapPoints
+                data: scope.mapPoints,
+                options: {
+                    radius: 30,
+                    opacity: 0.6,
+                    gradient: heatMapGradient,
+                    map: scope.map
+                }
             });
-
-            // applies custom visual characteristics to the heatmap
-            scope.heatmap.setOptions({radius: 30, gradient: heatMapGradient});
-
-            // attaches heatmap to the map
-            scope.heatmap.setMap(scope.map);
 		}
     }]);

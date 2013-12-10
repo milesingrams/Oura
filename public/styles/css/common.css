@@ -120,10 +120,10 @@ body {
 
 .sidebar {
   position: absolute;
-  left: 20px;
+  left: 0px;
   top: 0px;
-  width: 400px;
-  padding: 0 20px;
+  width: 440px;
+  padding: 0 40px;
   height: 100%;
   z-index: 1000;
   -webkit-transition: left 0.3s ease;
@@ -312,8 +312,7 @@ body {
 
 @media (max-width: 768px) {
   .sidebar {
-    left: 5%;
-    width: 90%;
+    width: 100%;
     top: 50%;
     height: 50%;
   }

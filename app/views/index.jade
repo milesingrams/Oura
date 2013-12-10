@@ -3,7 +3,6 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', itemscope='itemscope', ite
 	body
 		div.main(ng-controller="MainController")
 			div.interface(ng-controller="InterfaceController")
-				//- a(href="/" id="logo")
 				div.sidebar(ng-class="{closed: sidebarClosed}")
 					div.sidebar-content
 						sidebar-tweet.stweet(ng-repeat="tweet in fullTweets | limitTo: fullTweetLimit" tweet="tweet" map="map")
