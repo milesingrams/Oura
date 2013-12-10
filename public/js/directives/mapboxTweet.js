@@ -18,7 +18,7 @@ window.angular.module('oura.directives.mapboxTweet', [])
 
                 scope.moveToTweet = function () {
                     scope.map.panTo(scope.tweet.location);
-                    scope.map.setZoom(17);
+                    scope.map.setZoom(15);
                 }
             }   
     	}

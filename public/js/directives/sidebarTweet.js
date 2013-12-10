@@ -30,7 +30,7 @@ window.angular.module('oura.directives.sidebarTweet', [])
 
                 scope.moveToTweet = function () {
                     scope.map.panTo(scope.tweet.location);
-                    scope.map.setZoom(17);
+                    scope.map.setZoom(15);
                 }
 
                 scope.$on('$destroy', function() {

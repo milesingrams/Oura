@@ -1,5 +1,7 @@
 // VARIABLES
 
+$small-font: 12px;
+$medium-font: 14px;
 
 // GENERAL
 * {
@@ -10,7 +12,8 @@ html, body{
   height:100%; 
 }
 
-/* MAP STYLING */
+
+/* MAP STYLING *****************************************************************/
 #map-canvas {
   height: 100%;
 }
@@ -62,6 +65,7 @@ html, body{
   border-radius: 20px;
 }
 
+
 /* TOP BAR STYLING */
 .top-bar {
   width: 100%;
@@ -77,7 +81,8 @@ html, body{
   width: 130px;
 }
 
-/* SIDEBAR STYLING */
+
+/* SIDEBAR STYLING ****************************************************************/
 .sidebar {
   position: absolute;
   left: 20px;
@@ -95,6 +100,7 @@ html, body{
   min-height: 100%;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border-top: 1px solid #ddd;
 }
 
 @keyframes fadein {
@@ -106,7 +112,8 @@ html, body{
     }
 }
 
-/* SIDEBAR-TWEET STYLING */
+
+/* SIDEBAR-TWEET STYLING *****************************************************************/
 
 .stweet {
   animation: fadein 1s ease;
@@ -114,6 +121,7 @@ html, body{
   position: relative;
   padding: 12px 12px;
   border-bottom: 1px solid #ddd;
+  font-size: $medium-font;
 }
 
 .stweet:hover {
@@ -130,6 +138,7 @@ html, body{
 
 .stweet-name {
   color: #333;
+  font-size: inherit;
 }
 
 .stweet-profile-group:hover .stweet-name {
@@ -137,7 +146,7 @@ html, body{
 }
 
 .stweet-screen-name {  
-  font-size: 12px;
+  font-size: $small-font;
   color: #999;
 }
 
@@ -153,14 +162,18 @@ html, body{
 }
 
 .stweet-text {
+  font-size: inherit;
   white-space: pre-wrap;
 }
 
 .stweet-text a {
+  font-size: inherit;
   color: #0084B4;
 }
 
-/* MAPBOX STYLING */
+
+
+/* MAPBOX STYLING *****************************************************************/
 .mapbox {
   z-index: 1000;
 }
@@ -193,7 +206,9 @@ html, body{
   border-width: 11px;
 }
 
-/* MAPBOX TWEET STYLING */
+
+
+/* MAPBOX TWEET STYLING *****************************************************************/
 
 .mtweet {
   cursor: default;
@@ -202,6 +217,7 @@ html, body{
   padding: 8px 12px;
   width: 100%;
   border-bottom: 1px solid #ddd;
+  font-size: $small-font;
 }
 
 .mtweet:hover {
@@ -213,7 +229,7 @@ html, body{
 }
 
 .mtweet-name {
-  font-size: 12;
+  font-size: inherit;
   color: #333;
 }
 
@@ -232,7 +248,7 @@ html, body{
 
 .mtweet-text {
   white-space: pre-wrap;
-  font-size: 12;
+  font-size: inherit;
 }
 
 .mtweet-text a {
@@ -240,8 +256,26 @@ html, body{
   font-size: inherit;
 }
 
+
+
+/* MEDIA QUERIES ****************************************************************/
+
 @media (max-width: 978px) {
     body {
       padding:0;
     }
+}
+
+@media (max-width : 768px) {
+  .sidebar {
+    left: 5%;
+    width: 90%;
+    top: 50%;
+    height: 50%;
+  }
+
+  .stweet {
+    padding: 6px 12px;
+    font-size: $small-font;
+  }
 }
