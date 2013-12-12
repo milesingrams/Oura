@@ -49,9 +49,9 @@ window.angular.module('oura.directives.ouraMap', [])
 
 						// sets options for map
 						var mapOptions = {
-								zoom: 6,
+								zoom: 4,
 								minZoom: 1,
-								center: new google.maps.LatLng(40.7, -74),
+								center: new google.maps.LatLng(40.7, -114),
 								disableDefaultUI: true,
 								styles: mapStyle
 						};
@@ -91,28 +91,28 @@ window.angular.module('oura.directives.ouraMap', [])
 
 						// defines a custom heatmap gradient
 						var heatMapGradient = [
-								'rgba(255, 0, 150, 0)',
-								'rgba(255, 0, 150, 0)',
-								'rgba(255, 0, 150, 0)',
-								'rgba(255, 0, 150, 0)',
-								'rgba(255, 0, 150, 0.25)',
-								'rgba(255, 0, 150, 0.25)',
-								'rgba(255, 0, 150, 0.25)',
-								'rgba(255, 0, 150, 0.25)',
-								'rgba(255, 0, 150, 0.25)',
-								'rgba(255, 0, 150, 0.25)',
-								'rgba(255, 0, 150, 0.5)',
-								'rgba(255, 0, 150, 0.5)',
-								'rgba(255, 0, 150, 0.5)',
-								'rgba(255, 0, 150, 0.5)',
-								'rgba(255, 0, 150, 0.5)',
-								'rgba(255, 0, 150, 0.75)',
-								'rgba(255, 0, 150, 0.75)',
-								'rgba(255, 0, 150, 0.75)',
-								'rgba(255, 0, 150, 0.75)',
-								'rgba(255, 0, 150, 1)',
-								'rgba(255, 0, 150, 1)',
-								'rgba(255, 0, 150, 1)'
+								'rgba(255, 50, 220, 0)',
+								'rgba(255, 50, 220, 0)',
+								'rgba(255, 50, 220, 0)',
+								'rgba(255, 50, 220, 0)',
+								'rgba(255, 50, 220, 0.25)',
+								'rgba(255, 50, 220, 0.25)',
+								'rgba(255, 50, 220, 0.25)',
+								'rgba(255, 50, 220, 0.25)',
+								'rgba(255, 50, 220, 0.25)',
+								'rgba(255, 50, 220, 0.25)',
+								'rgba(255, 50, 220, 0.5)',
+								'rgba(255, 50, 220, 0.5)',
+								'rgba(255, 50, 220, 0.5)',
+								'rgba(255, 50, 220, 0.5)',
+								'rgba(255, 50, 220, 0.5)',
+								'rgba(255, 50, 220, 0.75)',
+								'rgba(255, 50, 220, 0.75)',
+								'rgba(255, 50, 220, 0.75)',
+								'rgba(255, 50, 220, 0.75)',
+								'rgba(255, 50, 220, 1)',
+								'rgba(255, 50, 220, 1)',
+								'rgba(255, 50, 220, 1)'
 						];
 
 						// creates a new heatmap layer with data from the scope

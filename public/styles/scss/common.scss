@@ -1,5 +1,5 @@
 // VARIABLES
-$oura-color: rgb(255, 0, 150);
+$oura-color: rgb(255, 50, 220);
 $trans-white: rgba(255, 255, 255, 0.9);
 
 $small-font: 12px;
@@ -84,7 +84,7 @@ html, body{
 
 .sidebar-header {
   margin-left: 20px;
-  background: rgba(255, 0, 150, 0.9);
+  background: rgba($oura-color, 0.9);
   height: 40px;
 }
 
