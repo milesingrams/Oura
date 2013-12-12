@@ -1,6 +1,6 @@
 // VARIABLES
 $oura-color: rgb(255, 0, 150);
-$trans-white: rgba(255, 255, 255, 0.85);
+$trans-white: rgba(255, 255, 255, 0.9);
 
 $small-font: 12px;
 $medium-font: 14px;
@@ -68,41 +68,46 @@ html, body{
 }
 
 
-/* TOP BAR STYLING */
-.top-bar {
-  width: 100%;
-  height: 62px;
-  background: #333;
-}
-
-#logo {
-  background: url('/img/oura-logo.png') no-repeat;
-  display: inline-block;
-  margin-left: 9px;
-  height: 62px;
-  width: 130px;
-}
-
 
 /* SIDEBAR STYLING ****************************************************************/
 .sidebar {
   position: absolute;
-  left: 0px;
   top: 0px;
-  width: 440px;
-  padding: 0 40px;
+  margin-left: 40px;
+  width: 360px;
   height: 100%;
-  z-index: 1000;
+  z-index: 10;
   transition: left 0.3s ease;
-  overflow-y: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-header {
+  background: rgba(51, 51, 51, 0.9);
+  height: 40px;
+}
+
+.oura-logo {
+  position: relative;
+  top: -38px;
+  left: -57.9px;
+
+  img {
+    height: 116px;
+    width: auto;
+  }
 }
 
 .sidebar-content {
+  height: calc(100% - 40px);
   width: 100%;
-  min-height: 100%;
   background: $trans-white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  border-top: 1px solid #ddd;
+}
+
+.sidebar-tweets {
+  padding-left: 20px;
+  margin-left: -20px;
+  height: calc(100% - 40px);
+  overflow-y: scroll;
 }
 
 @keyframes fadein {
@@ -154,7 +159,6 @@ html, body{
 
 .stweet-profile-img {
   position: absolute;
-  top: 0px;
   left: -20px;
   width: 40px;
   height: 40px;
@@ -269,7 +273,7 @@ html, body{
 
 @media (max-width : 768px) {
   .sidebar {
-    width: 100%;
+    width: calc(100% - 80px);
     top: 55%;
     height: 45%;
   }

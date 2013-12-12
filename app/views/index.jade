@@ -4,8 +4,12 @@ html(lang='en', xmlns='http://www.w3.org/1999/xhtml', itemscope='itemscope', ite
 		div.main(ng-controller="MainController")
 			div.interface(ng-controller="InterfaceController")
 				div.sidebar(ng-class="{closed: sidebarClosed}")
+					div.sidebar-header
+						a.oura-logo(href="/")
+							img(src="img/oura-logo.png")
 					div.sidebar-content
-						sidebar-tweet.stweet(ng-repeat="tweet in fullTweets | limitTo: fullTweetLimit" tweet="tweet" map="map")
+						div.sidebar-tweets
+							sidebar-tweet.stweet(ng-repeat="tweet in fullTweets | limitTo: fullTweetLimit" tweet="tweet" map="map")
 			div(oura-map id="map-canvas")
 		include ./includes/foot
 		script(src="http://localhost:35729/livereload.js")
