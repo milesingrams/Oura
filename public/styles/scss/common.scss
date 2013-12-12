@@ -71,25 +71,27 @@ html, body{
 
 /* SIDEBAR STYLING ****************************************************************/
 .sidebar {
+  border-top-left-radius: 60px;
   position: absolute;
   top: 0px;
   margin-left: 40px;
   width: 360px;
   height: 100%;
   z-index: 10;
-  transition: left 0.3s ease;
+  transition: top 0.3s ease;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar-header {
-  background: rgba(51, 51, 51, 0.9);
+  margin-left: 20px;
+  background: rgba(255, 0, 150, 0.9);
   height: 40px;
 }
 
 .oura-logo {
   position: relative;
   top: -38px;
-  left: -57.9px;
+  left: -78px;
 
   img {
     height: 116px;
@@ -129,10 +131,13 @@ html, body{
   padding: 12px 12px;
   border-bottom: 1px solid #ddd;
   font-size: $medium-font;
+  &:first-child {
+    padding-top: 20px;
+  }
 }
 
 .stweet:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: #fff;
 }
 
 .stweet-content {
