@@ -71,7 +71,7 @@ html, body{
 
 /* SIDEBAR STYLING ****************************************************************/
 .sidebar {
-  border-top-left-radius: 60px;
+  border-top-left-radius: 80px;
   position: absolute;
   top: 0px;
   margin-left: 40px;
@@ -99,6 +99,41 @@ html, body{
   }
 }
 
+.profile-group {
+  float: right;
+  height: 100%;
+  width: auto;
+}
+
+.profile-group:hover {
+  text-decoration: none;
+}
+
+.profile-button {
+  position: absolute;
+  right: -20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.profile-username {
+  overflow: hidden;
+  max-width: 0px;
+  margin-top: 9px;
+  margin-right: 25px;
+  text-align: right;
+  white-space: nowrap;
+  color: #fff;
+  transition: max-width 0.3s ease;
+}
+
+.profile-group:hover .profile-username {
+  max-width: 100px;
+}
+
 .sidebar-content {
   height: calc(100% - 40px);
   width: 100%;
@@ -108,7 +143,7 @@ html, body{
 .sidebar-tweets {
   padding-left: 20px;
   margin-left: -20px;
-  height: calc(100% - 40px);
+  height: 100%;
   overflow-y: scroll;
 }
 
@@ -120,7 +155,6 @@ html, body{
       opacity: 1; 
     }
 }
-
 
 /* SIDEBAR-TWEET STYLING *****************************************************************/
 
@@ -137,7 +171,7 @@ html, body{
 }
 
 .stweet:hover {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .stweet-content {
@@ -175,7 +209,7 @@ html, body{
 .stweet-text {
   font-size: inherit;
   white-space: pre-wrap;
-
+  margin-bottom: 0;
   a {
     font-size: inherit;
     color: #0084B4;
@@ -259,7 +293,7 @@ html, body{
 .mtweet-text {
   white-space: pre-wrap;
   font-size: inherit;
-
+  margin-bottom: 0;
   a {
     color: #0084B4;
     font-size: inherit;
