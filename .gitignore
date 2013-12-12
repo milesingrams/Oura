@@ -1,5 +1,5 @@
 .DS_Store
 .nodeamonignore
-.sass-cache
+.sass-cache/
 bower_components/
 node_modules/
